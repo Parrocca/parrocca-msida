@@ -3,3 +3,8 @@ DATA: 19 ta' Marzu 2027
 TITLU: Solennità ta' San Ġużepp
 DESKRIZZJONI: Dan huwa eżempju. Ibdel jew ħassar din l-attività meta ddaħħal l-ewwel attività vera.
 ---
+DATA: 20 ta' Settembru 2026
+ĦIN: 18.00
+TITLU: Festa ta' San Franġisk
+DESKRIZZJONI: Quddiesa Solenni u wara purċisjoni.
+---
