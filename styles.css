@@ -269,3 +269,61 @@ footer a{color:var(--gold-soft);text-decoration:none;font-weight:800}
 .notice-preview img{width:100%;height:360px;object-fit:cover;object-position:top}
 .notice-preview span{display:block;padding:16px 20px;color:var(--navy);font-weight:800}
 @media(max-width:760px){.notice-preview-grid{grid-template-columns:1fr}.notice-preview img{height:300px}}
+
+/* Sistema sempliċi tal-avviżi u l-arkivju */
+.notice-current { margin-bottom: 1.5rem; }
+.notice-current .notice { max-width: none; }
+.supporting-notices { margin-top: 1.25rem; }
+.archive-box { margin-top: 2rem; padding: 1.5rem; background: #fff; border-radius: 22px; box-shadow: 0 12px 35px rgba(16, 36, 58, .08); }
+.archive-heading { display: flex; justify-content: space-between; gap: 1.5rem; align-items: end; margin-bottom: 1rem; }
+.archive-heading h3 { margin: .25rem 0 0; font-size: 1.6rem; }
+.archive-heading p { margin: 0; color: #5f6b76; }
+.notice-archive { display: grid; gap: .75rem; }
+.archive-item { border: 1px solid rgba(21, 43, 67, .12); border-radius: 14px; overflow: hidden; background: #fbfaf7; }
+.archive-item summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 1rem; padding: 1rem 1.15rem; align-items: center; }
+.archive-item summary::-webkit-details-marker { display: none; }
+.archive-item summary::after { content: '+'; font-size: 1.4rem; font-weight: 700; margin-left: auto; }
+.archive-item[open] summary::after { content: '−'; }
+.archive-item summary span { color: #7b6740; font-weight: 700; }
+.archive-item summary strong { margin-right: auto; }
+.archive-content { padding: 0 1rem 1rem; }
+.archive-content .notice { box-shadow: none; border: 0; background: #fff; }
+.archive-empty { color: #66717c; margin: .5rem 0; }
+@media (max-width: 700px) {
+  .archive-heading { display: block; }
+  .archive-heading p { margin-top: .5rem; }
+  .archive-item summary { align-items: flex-start; flex-direction: column; }
+  .archive-item summary::after { position: absolute; right: 2rem; }
+}
+
+
+/* Avviżi sempliċi minn avvizi.txt */
+.notice-loading{padding:28px;background:white;border:1px solid var(--line);border-radius:16px;color:var(--muted)}
+.latest-dynamic{max-width:900px;padding:36px}
+.latest-dynamic h3{font-size:2rem}
+.latest-dynamic p{line-height:1.7}
+.archive-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin:48px 0 18px}
+.archive-head h3{font-family:Georgia,"Times New Roman",serif;color:var(--navy-deep);font-size:2rem;margin:.15rem 0 0}
+.archive-head p{color:var(--muted);margin:0}
+.notice-archive{display:grid;gap:12px}
+.archive-item{background:white;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.archive-item summary{cursor:pointer;list-style:none;padding:18px 22px;display:flex;justify-content:space-between;gap:20px;align-items:center;color:var(--navy);font-weight:800}
+.archive-item summary::-webkit-details-marker{display:none}
+.archive-item summary::after{content:"＋";font-size:1.2rem;color:var(--gold)}
+.archive-item[open] summary::after{content:"−"}
+.archive-item summary span{color:var(--gold);font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.archive-item summary strong{margin-left:auto;text-align:right}
+.archive-content{padding:0 18px 18px}
+.archive-card{box-shadow:none;background:#fffdf8}
+.archive-card p{line-height:1.7}
+.archive-empty{background:white;border:1px dashed var(--line);border-radius:14px;padding:22px;color:var(--muted)}
+.extra-notices{grid-template-columns:minmax(0,1fr);margin-top:42px}
+.extra-notices .notice{max-width:900px}
+.error-notice{border-color:#d8b9b9}
+@media (max-width:700px){
+  .archive-head{display:block}
+  .archive-head p{margin-top:8px}
+  .archive-item summary{align-items:flex-start;flex-wrap:wrap}
+  .archive-item summary strong{width:100%;margin-left:0;text-align:left}
+  .latest-dynamic{padding:26px}
+}

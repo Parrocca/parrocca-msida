@@ -1,0 +1,32 @@
+KIF TAĠĠORNA L-AVVIŻI
+======================
+
+Kull ġimgħa għandek bżonn tibdel biss il-fajl: avvizi.txt
+
+1. Fuq GitHub, iftaħ avvizi.txt u agħfas il-lapes (Edit).
+2. Żid avviż ġdid FUQ NETT, qabel l-avviż ta' qabel.
+3. Uża dan il-format:
+
+---AVVIZ---
+DATA: Il-Ħadd 6 ta' Settembru 2026
+TITOLU: Avviżi Parrokkjali
+SOTTOTITOLU: It-23 Ħadd ta' Matul is-Sena
+IMMAĠNI:
+TEST:
+Ikteb jew paste l-avviżi tiegħek hawn.
+
+Tista' tagħmel paragrafu ġdid billi tħalli linja vojta.
+
+4. TĦASSARX l-avviżi ta' taħt. Dawk isiru awtomatikament l-arkivju.
+5. Agħfas Commit changes.
+
+JEKK GĦANDEK RITRATT/PDF TAL-AVVIŻ:
+- L-ewwel ittella' l-fajl fir-repository GitHub.
+- Imbagħad ħdejn IMMAĠNI: ikteb l-isem eżatt tal-fajl, eż.
+  IMMAĠNI: avvizi-6-settembru-2026.png
+
+JEKK M'GĦANDEKX RITRATT:
+- Ħalli IMMAĠNI: vojta.
+
+L-ewwel avviż fil-fajl jidher bħala l-avviż kurrenti.
+L-avviżi l-oħra kollha jidhru awtomatikament taħt "Avviżi ta' qabel".

@@ -72,18 +72,21 @@
             <span class="kicker dark">L-aħħar aħbarijiet</span>
             <h2>Avviżi Parrokkjali</h2>
           </div>
-          <p>Avviżi u tagħrif importanti għall-komunità tal-Parroċċa Arċipretali San Ġużepp - Msida.</p>
+          <p>L-aħħar avviżi jidhru hawn awtomatikament. L-avviżi ta' qabel jibqgħu disponibbli fl-Arkivju.</p>
         </div>
 
-        <div class="notice-grid parish-notices">
-          <article class="notice featured">
-            <span class="pill">Il-Ħadd 30 t’ Awwissu 2026</span>
-            <h3>Avviżi Parrokkjali</h3>
-            <p><strong>It-22 Ħadd ta’ Matul is-Sena</strong></p>
-            <p>Nhar il-Ġimgħa taħbat l-ewwel ġimgħa tax-xahar. Fis-6.30pm ikollna quddiesa bil-prietka minn Patri Pawl Attard OFM bi preparazzjoni għall-Festa tal-Pjagi ta’ San Franġisk. Wara jkun hemm nofs siegħa adorazzjoni ewkaristika u barka.</p>
-            <a class="notice-image-link" href="avvizi-30-awissu-2026.png" target="_blank">Ara l-avviż sħiħ →</a>
-          </article>
+        <div id="latest-notice" class="notice-loading">Qed jittellgħu l-aħħar avviżi…</div>
 
+        <div class="archive-head">
+          <div>
+            <span class="kicker dark">Avviżi ta' qabel</span>
+            <h3>Arkivju tal-Avviżi</h3>
+          </div>
+          <p>Agħfas fuq data biex tiftaħ avviż antik.</p>
+        </div>
+        <div id="notice-archive" class="notice-archive"></div>
+
+        <div class="notice-grid parish-notices extra-notices">
           <article class="notice">
             <div class="notice-icon">📝</div>
             <h3>Pjan Pastorali 2026–2027</h3>
@@ -91,24 +94,6 @@
             <p><strong>Data tal-għeluq: 15 ta’ Settembru 2026.</strong></p>
             <a class="notice-image-link dark-link" href="pjan-pastorali-2026-2027.png" target="_blank">Ara l-kwestjonarju u l-QR code →</a>
           </article>
-
-          <article class="notice">
-            <div class="notice-icon">📱</div>
-            <h3>Kif tieħu sehem</h3>
-            <p><strong>Bil-miktub:</strong> ħu kopja minn fuq l-imwejjed ħdejn il-bieb ta’ barra tal-knisja u poġġiha fil-kaxxa apposta wara li timliha.</p>
-            <p><strong>Online:</strong> skennja l-QR code fuq il-poster jew in-notice board u imla l-kwestjonarju mill-mobile jew mill-kompjuter.</p>
-          </article>
-        </div>
-
-        <div class="notice-preview-grid">
-          <a href="avvizi-30-awissu-2026.png" target="_blank" class="notice-preview">
-            <img src="avvizi-30-awissu-2026.png" alt="Avviżi Parrokkjali tal-Ħadd 30 t’ Awwissu 2026">
-            <span>Ara l-Avviżi Parrokkjali</span>
-          </a>
-          <a href="pjan-pastorali-2026-2027.png" target="_blank" class="notice-preview">
-            <img src="pjan-pastorali-2026-2027.png" alt="Kwestjonarju tal-Pjan Pastorali 2026-2027">
-            <span>Ara l-Pjan Pastorali u l-QR Code</span>
-          </a>
         </div>
       </div>
     </section>
@@ -228,5 +213,86 @@
     </div>
   </footer>
 
+  <script>
+    function escapeHtml(value) {
+      return String(value || '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+
+    function parseAvvizi(text) {
+      return text.split('---AVVIZ---')
+        .map(part => part.trim())
+        .filter(Boolean)
+        .map(part => {
+          const lines = part.split(/\r?\n/);
+          const item = { data: '', titolu: '', sottotitolu: '', immaġni: '', test: '' };
+          let body = [];
+          let inText = false;
+          for (const line of lines) {
+            if (inText) { body.push(line); continue; }
+            if (line.trim() === 'TEST:') { inText = true; continue; }
+            const m = line.match(/^(DATA|TITOLU|SOTTOTITOLU|IMMAĠNI):\s*(.*)$/i);
+            if (m) {
+              const key = m[1].toUpperCase();
+              const val = m[2].trim();
+              if (key === 'DATA') item.data = val;
+              if (key === 'TITOLU') item.titolu = val;
+              if (key === 'SOTTOTITOLU') item.sottotitolu = val;
+              if (key === 'IMMAĠNI') item.immaġni = val;
+            }
+          }
+          item.test = body.join('\n').trim();
+          return item;
+        });
+    }
+
+    function paragraphs(text) {
+      return String(text || '').split(/\n\s*\n/).filter(Boolean)
+        .map(p => `<p>${escapeHtml(p).replaceAll('\n', '<br>')}</p>`).join('');
+    }
+
+    function noticeCard(item, featured = false) {
+      const image = item.immaġni
+        ? `<a class="notice-image-link${featured ? '' : ' dark-link'}" href="${encodeURI(item.immaġni)}" target="_blank" rel="noopener">Ara l-avviż oriġinali →</a>`
+        : '';
+      return `<article class="notice${featured ? ' featured' : ''}">
+        <span class="pill">${escapeHtml(item.data)}</span>
+        <h3>${escapeHtml(item.titolu || 'Avviżi Parrokkjali')}</h3>
+        ${item.sottotitolu ? `<p><strong>${escapeHtml(item.sottotitolu)}</strong></p>` : ''}
+        ${paragraphs(item.test)}
+        ${image}
+      </article>`;
+    }
+
+    fetch('avvizi.txt?ts=' + Date.now(), { cache: 'no-store' })
+      .then(r => { if (!r.ok) throw new Error('Ma nstabx avvizi.txt'); return r.text(); })
+      .then(text => {
+        const items = parseAvvizi(text);
+        const current = document.getElementById('avviz-kurrenti');
+        const archive = document.getElementById('arkivju-avvizi');
+        if (!items.length) {
+          current.innerHTML = '<article class="notice featured"><p>Bħalissa m’hemmx avviżi disponibbli.</p></article>';
+          return;
+        }
+        current.innerHTML = noticeCard(items[0], true);
+        if (items.length === 1) {
+          archive.innerHTML = '<p class="archive-empty">Għad m’hemmx avviżi preċedenti fl-arkivju.</p>';
+          return;
+        }
+        archive.innerHTML = items.slice(1).map((item, i) => `
+          <details class="archive-item">
+            <summary><span>${escapeHtml(item.data)}</span><strong>${escapeHtml(item.titolu || 'Avviżi Parrokkjali')}</strong></summary>
+            <div class="archive-content">${noticeCard(item, false)}</div>
+          </details>`).join('');
+      })
+      .catch(() => {
+        document.getElementById('avviz-kurrenti').innerHTML = '<article class="notice featured"><p>Ma rnexxilniex intellgħu l-avviżi. Erġa’ pprova aktar tard.</p></article>';
+      });
+  </script>
+  <script src="avvizi.js"></script>
 </body>
 </html>
