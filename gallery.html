@@ -31,10 +31,20 @@
 <button class="photo-card" type="button" onclick="openPhoto('ritratt-16.jpeg')"><img src="ritratt-16.jpeg" alt="Ritratt mill-ħajja tal-Parroċċa" loading="lazy"></button>
 <button class="photo-card" type="button" onclick="openPhoto('ritratt-17.jpeg')"><img src="ritratt-17.jpeg" alt="Ritratt mill-ħajja tal-Parroċċa" loading="lazy"></button>
 </div></section></main>
-<div id="lightbox" class="lightbox" aria-hidden="true" onclick="closePhoto(event)"><button class="lightbox-close" type="button" aria-label="Agħlaq" onclick="closePhoto(event)">×</button><img id="lightbox-img" alt="Ritratt imkabbar"></div>
+<div id="lightbox" class="lightbox" aria-hidden="true" onclick="closePhoto(event)">
+<button class="lightbox-close" type="button" aria-label="Agħlaq" onclick="closePhoto(event)">×</button>
+<button class="lightbox-prev" type="button" aria-label="Ritratt ta’ qabel" onclick="changePhoto(-1,event)">‹</button>
+<img id="lightbox-img" alt="Ritratt imkabbar">
+<button class="lightbox-next" type="button" aria-label="Ritratt li jmiss" onclick="changePhoto(1,event)">›</button>
+</div>
 <script>
-function openPhoto(src){const b=document.getElementById('lightbox');document.getElementById('lightbox-img').src=src;b.classList.add('show');b.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'}
-function closePhoto(e){if(e && e.target.id==='lightbox-img')return;const b=document.getElementById('lightbox');b.classList.remove('show');b.setAttribute('aria-hidden','true');document.body.style.overflow=''}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closePhoto(e)});
+const photos=[
+'ritratt-01.jpg','ritratt-02.jpg','ritratt-03.jpg','ritratt-04.jpg','ritratt-05.jpg','ritratt-06.jpg','ritratt-07.jpg','ritratt-08.jpg','ritratt-09.jpg','ritratt-10.jpg','ritratt-11.jpg','ritratt-12.jpg','ritratt-13.jpg','ritratt-14.jpg','ritratt-15.jpeg','ritratt-16.jpeg','ritratt-17.jpeg'
+];
+let currentPhoto=0;
+function openPhoto(src){currentPhoto=photos.indexOf(src);if(currentPhoto<0)currentPhoto=0;const b=document.getElementById('lightbox');document.getElementById('lightbox-img').src=photos[currentPhoto];b.classList.add('show');b.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'}
+function changePhoto(step,e){if(e)e.stopPropagation();currentPhoto=(currentPhoto+step+photos.length)%photos.length;document.getElementById('lightbox-img').src=photos[currentPhoto]}
+function closePhoto(e){if(e && (e.target.id==='lightbox-img' || e.target.classList.contains('lightbox-prev') || e.target.classList.contains('lightbox-next')))return;const b=document.getElementById('lightbox');b.classList.remove('show');b.setAttribute('aria-hidden','true');document.body.style.overflow=''}
+document.addEventListener('keydown',e=>{const b=document.getElementById('lightbox');if(!b.classList.contains('show'))return;if(e.key==='Escape')closePhoto();if(e.key==='ArrowLeft')changePhoto(-1);if(e.key==='ArrowRight')changePhoto(1)});
 </script>
 </body></html>
