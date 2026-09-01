@@ -173,7 +173,11 @@ a{color:inherit}
   text-align:center;
 }
 .mass-card span{display:block;color:#cbd7df;margin-bottom:8px}
-.mass-card strong{font-size:2.2rem;color:var(--gold-soft)}
+.mass-card strong{.mass-card strong{
+  display:block;
+  font-size:2rem;
+  line-height:1.35;
+  white-space:nowrap;}
 
 .history-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
 .history-photo{position:relative}
