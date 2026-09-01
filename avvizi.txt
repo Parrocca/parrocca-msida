@@ -1,9 +1,3 @@
-TITLU: Avviżi Parrokkjali
-SOTTOTITLU: Test tas-sistema tal-Arkivju
-
-Dan huwa avviż ta' prova biex niżguraw li s-sistema tal-Arkivju qed taħdem sew.
-
----
 DATA: Il-Ħadd 30 ta' Awwissu 2026
 TITLU: Avviżi Parrokkjali
 SOTTOTITLU: It-22 Ħadd ta' Matul is-Sena
