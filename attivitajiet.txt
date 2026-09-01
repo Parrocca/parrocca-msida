@@ -1,0 +1,5 @@
+DATA: 19 ta' Marzu 2027
+ĦIN: 18.30
+TITLU: Solennità ta' San Ġużepp
+DESKRIZZJONI: Dan huwa eżempju. Ibdel jew ħassar din l-attività meta ddaħħal l-ewwel attività vera.
+---
