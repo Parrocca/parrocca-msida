@@ -510,3 +510,30 @@ footer a{color:var(--gold-soft);text-decoration:none;font-weight:800}
   .lightbox-prev{left:8px}
   .lightbox-next{right:8px}
 }
+/* Ċentrar tal-paġna tal-Attivitajiet */
+.activities-page .section-heading,
+.activities-page .section-heading > div,
+.activities-page .section-heading p {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Ċentrar tal-Ħinijiet tal-Quddies */
+#quddies .section-heading,
+#quddies .section-heading > div,
+#quddies .section-heading p {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#quddies .mass-grid {
+  width: min(1400px, 92%);
+  margin: 0 auto;
+  justify-content: center;
+}
+
+#quddies .mass-card {
+  text-align: center;
+}
