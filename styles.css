@@ -175,9 +175,11 @@ a{color:inherit}
 .mass-card span{display:block;color:#cbd7df;margin-bottom:8px}
 .mass-card strong{
   display:block;
-  font-size:2rem;
+  font-size:clamp(1.35rem,1.8vw,1.8rem);
   line-height:1.35;
-  white-space:nowrap;}
+}
+.mass-card strong + strong{margin-top:8px}
+.mass-card .seasonal{font-size:clamp(1.05rem,1.35vw,1.35rem);color:var(--gold-soft)}
 
 .history-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
 .history-photo{position:relative}
@@ -510,30 +512,57 @@ footer a{color:var(--gold-soft);text-decoration:none;font-weight:800}
   .lightbox-prev{left:8px}
   .lightbox-next{right:8px}
 }
-/* Ċentrar tal-paġna tal-Attivitajiet */
-.activities-page .section-heading,
-.activities-page .section-heading > div,
-.activities-page .section-heading p {
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-}
 
-/* Ċentrar tal-Ħinijiet tal-Quddies */
-#quddies .section-heading,
-#quddies .section-heading > div,
-#quddies .section-heading p {
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-}
 
-#quddies .mass-grid {
-  width: min(1400px, 92%);
-  margin: 0 auto;
-  justify-content: center;
+/* Paġna tal-Attivitajiet */
+.activities-body .site-header{
+  background:var(--paper);
+  border-bottom:1px solid var(--line);
 }
+.activities-body .nav-wrap{
+  width:min(1160px,92%);
+  margin:0 auto;
+  padding:22px 0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  text-align:center;
+}
+.activities-body .brand{text-decoration:none;justify-content:center}
+.activities-body .brand span:last-child{display:flex;flex-direction:column;align-items:center}
+.activities-body .brand small{
+  display:block;text-transform:uppercase;letter-spacing:.12em;
+  font-size:.67rem;color:var(--gold);font-weight:800;
+}
+.activities-body .site-header nav a{color:var(--navy);text-decoration:none;font-weight:700}
+.activities-body .site-header nav a:hover{color:var(--gold)}
+.activities-page{
+  width:min(1160px,92%);
+  margin:0 auto;
+  padding:72px 0 90px;
+}
+.activities-page .section-heading{
+  max-width:780px;
+  margin:0 auto 36px;
+  text-align:center;
+}
+.activities-page .section-heading .eyebrow{
+  display:block;color:var(--gold);font-size:.76rem;font-weight:800;
+  letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;
+}
+.activities-page .section-heading h1{
+  margin:0;font-family:Georgia,"Times New Roman",serif;color:var(--navy-deep);
+  font-size:clamp(2.4rem,5vw,4rem);line-height:1.05;font-weight:500;
+}
+.activities-page .section-heading p{margin:14px 0 0;color:var(--muted);font-size:1.02rem}
+.activities-archive-section{margin-top:38px}
 
-#quddies .mass-card {
-  text-align: center;
+/* Ħinijiet tal-Quddies */
+#quddies .container{width:min(1160px,92%);margin:0 auto}
+#quddies .mass-grid{width:100%;margin:0 auto;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+#quddies .mass-card{min-width:0;padding:28px 18px}
+@media(max-width:900px){
+  #quddies .mass-grid{grid-template-columns:1fr}
 }
