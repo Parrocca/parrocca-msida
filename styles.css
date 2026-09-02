@@ -666,3 +666,32 @@ footer a{color:var(--gold-soft);text-decoration:none;font-weight:800}
   .church-diagram{min-height:300px}
   .chapel-icon{transform:scale(.88)}
 }
+
+/* Għaqdiet u Operaturi Pastorali */
+.pastoral-body{background:var(--paper)}
+.pastoral-body .site-header{background:var(--paper);border-bottom:1px solid var(--line)}
+.pastoral-body .nav-wrap{width:min(1160px,92%);margin:0 auto;padding:20px 0;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.pastoral-body .brand{text-decoration:none}
+.pastoral-body .brand span:last-child{display:flex;flex-direction:column}
+.pastoral-body .brand small{display:block;text-transform:uppercase;letter-spacing:.12em;font-size:.67rem;color:var(--gold);font-weight:800}
+.pastoral-body .site-header nav a{color:var(--navy);text-decoration:none;font-weight:700}
+.pastoral-page{width:min(1160px,92%);margin:0 auto;padding:70px 0 90px}
+.pastoral-heading{max-width:900px;margin:0 auto 58px;text-align:center}
+.pastoral-heading .eyebrow,.pastoral-section-title .eyebrow{display:block;color:var(--gold);font-size:.76rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+.pastoral-heading h1{margin:0;font-family:Georgia,"Times New Roman",serif;color:var(--navy-deep);font-size:clamp(2.5rem,5vw,4.5rem);line-height:1.05;font-weight:500}
+.pastoral-heading p{margin:16px auto 0;color:var(--muted);font-size:1.08rem;max-width:760px}
+.pastoral-section{padding:38px 0;border-top:1px solid var(--line)}
+.pastoral-section-title{text-align:center;margin-bottom:28px}
+.pastoral-section-title h2{margin:0;font-family:Georgia,"Times New Roman",serif;color:var(--navy-deep);font-size:clamp(1.8rem,3vw,2.7rem);font-weight:500}
+.pastoral-grid{display:grid;grid-template-columns:minmax(0,760px);justify-content:center;gap:20px}
+.pastoral-grid-three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.pastoral-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px;display:flex;align-items:flex-start;gap:20px;box-shadow:0 10px 28px rgba(23,52,75,.06)}
+.pastoral-card.compact{align-items:center;justify-content:flex-start;min-height:135px}
+.pastoral-symbol{width:52px;height:52px;flex:0 0 52px;border-radius:50%;display:grid;place-items:center;background:var(--navy);color:var(--gold-soft);font-size:1.45rem}
+.pastoral-card h3{margin:0 0 9px;color:var(--navy-deep);font-family:Georgia,"Times New Roman",serif;font-size:1.45rem;line-height:1.2}
+.pastoral-card.compact h3{margin:0;font-size:1.28rem}
+.pastoral-card p{margin:0 0 8px;color:var(--ink);line-height:1.65}
+.pastoral-contact a{color:var(--navy);font-weight:800;text-decoration:none}
+.pastoral-note{text-align:center;color:var(--muted);margin:34px auto 0;font-size:.94rem}
+@media(max-width:900px){.pastoral-grid-three{grid-template-columns:1fr}.pastoral-card.compact{min-height:auto}}
+@media(max-width:800px){.pastoral-body .nav-wrap{flex-direction:column;text-align:center}.pastoral-page{padding-top:50px}.pastoral-card{padding:22px}.pastoral-heading{margin-bottom:42px}}
