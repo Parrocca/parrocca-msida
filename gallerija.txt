@@ -1,0 +1,24 @@
+# GALLERIJA TAR-RITRATTI
+# Biex iżżid ritratt ġdid:
+# 1. Tella' r-ritratt fil-folder prinċipali tal-website fuq GitHub.
+# 2. Żid linja hawn taħt: isem-tal-file | deskrizzjoni
+# L-ewwel ritratt fil-lista jidher l-ewwel fil-gallerija.
+
+san-guzepp-purcissjoni.png | San Ġużepp fil-festa parrokkjali
+ritratt-01.jpg | Ritratt mill-ħajja tal-Parroċċa
+ritratt-02.jpg | Ritratt mill-ħajja tal-Parroċċa
+ritratt-03.jpg | Ritratt mill-ħajja tal-Parroċċa
+ritratt-04.jpg | Ritratt mill-ħajja tal-Parroċċa
+ritratt-05.jpg | Ritratt mill-ħajja tal-Parroċċa
+ritratt-06.jpg | Ritratt mill-ħajja tal-Parroċċa
+ritratt-07.jpg | Ritratt mill-ħajja tal-Parroċċa
+ritratt-08.jpg | Ritratt mill-ħajja tal-Parroċċa
+ritratt-09.jpg | Ritratt mill-ħajja tal-Parroċċa
+ritratt-10.jpg | Ritratt mill-ħajja tal-Parroċċa
+ritratt-11.jpg | Ritratt mill-ħajja tal-Parroċċa
+ritratt-12.jpg | Ritratt mill-ħajja tal-Parroċċa
+ritratt-13.jpg | Ritratt mill-ħajja tal-Parroċċa
+ritratt-14.jpg | Ritratt mill-ħajja tal-Parroċċa
+ritratt-15.jpeg | Ritratt mill-ħajja tal-Parroċċa
+ritratt-16.jpeg | Ritratt mill-ħajja tal-Parroċċa
+ritratt-17.jpeg | Ritratt mill-ħajja tal-Parroċċa
