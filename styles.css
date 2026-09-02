@@ -590,3 +590,79 @@ footer a{color:var(--gold-soft);text-decoration:none;font-weight:800}
 .church-details{margin-top:20px;padding:18px 20px;background:#fff;border:1px solid var(--line);border-radius:14px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 24px}
 .church-details p{margin:0;font-size:.96rem}.church-details strong{color:var(--navy-deep)}.church-details a{color:var(--navy);font-weight:700}
 @media(max-width:800px){.churches-body .nav-wrap{flex-direction:column;text-align:center}.church-entry{grid-template-columns:1fr;gap:24px}.church-entry.reverse .church-photo,.church-entry.reverse .church-copy{order:initial}.church-photo img{height:300px}.church-details{grid-template-columns:1fr}.churches-page{padding-top:50px}}
+
+
+/* Dijagramma għall-Kappella taċ-Ċentru */
+.church-diagram{
+  min-height:360px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(145deg,#fffdf8,#f4ead8);
+  border:1px solid var(--line);
+}
+.chapel-icon{
+  position:relative;
+  width:220px;
+  height:250px;
+}
+.chapel-building{
+  position:absolute;
+  left:35px;
+  right:35px;
+  bottom:15px;
+  height:145px;
+  border:3px solid var(--gold);
+  border-top:0;
+}
+.chapel-roof{
+  position:absolute;
+  left:44px;
+  top:58px;
+  width:130px;
+  height:130px;
+  border-left:3px solid var(--gold);
+  border-top:3px solid var(--gold);
+  transform:rotate(45deg);
+  transform-origin:center;
+}
+.chapel-cross{
+  position:absolute;
+  left:108px;
+  top:8px;
+  width:4px;
+  height:44px;
+  background:var(--gold);
+}
+.chapel-cross:after{
+  content:"";
+  position:absolute;
+  width:28px;
+  height:4px;
+  left:-12px;
+  top:11px;
+  background:var(--gold);
+}
+.chapel-window{
+  position:absolute;
+  left:94px;
+  top:128px;
+  width:32px;
+  height:32px;
+  border:3px solid var(--gold);
+  border-radius:50%;
+  background:#fffaf0;
+}
+.chapel-door{
+  position:absolute;
+  left:84px;
+  bottom:15px;
+  width:52px;
+  height:78px;
+  border:3px solid var(--gold);
+  border-radius:28px 28px 0 0;
+  background:#f2dfba;
+}
+@media(max-width:800px){
+  .church-diagram{min-height:300px}
+  .chapel-icon{transform:scale(.88)}
+}
