@@ -566,3 +566,27 @@ footer a{color:var(--gold-soft);text-decoration:none;font-weight:800}
 @media(max-width:900px){
   #quddies .mass-grid{grid-template-columns:1fr}
 }
+
+
+/* Knejjes u Kappelli */
+.churches-body{background:var(--paper)}
+.churches-body .site-header{background:var(--paper);border-bottom:1px solid var(--line)}
+.churches-body .nav-wrap{width:min(1160px,92%);margin:0 auto;padding:20px 0;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.churches-body .brand{text-decoration:none}
+.churches-body .brand span:last-child{display:flex;flex-direction:column}
+.churches-body .brand small{display:block;text-transform:uppercase;letter-spacing:.12em;font-size:.67rem;color:var(--gold);font-weight:800}
+.churches-body .site-header nav a{color:var(--navy);text-decoration:none;font-weight:700}
+.churches-page{width:min(1160px,92%);margin:0 auto;padding:70px 0 90px}
+.churches-heading{max-width:800px;margin:0 auto 52px;text-align:center}
+.churches-heading .eyebrow,.church-label{display:block;color:var(--gold);font-size:.76rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+.churches-heading h1{margin:0;font-family:Georgia,"Times New Roman",serif;color:var(--navy-deep);font-size:clamp(2.6rem,5vw,4.6rem);line-height:1.05;font-weight:500}
+.churches-heading p{margin:16px auto 0;color:var(--muted);font-size:1.08rem}
+.church-entry{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:46px;align-items:center;padding:38px 0;border-top:1px solid var(--line)}
+.church-entry.reverse .church-photo{order:2}.church-entry.reverse .church-copy{order:1}
+.church-photo{border-radius:18px;overflow:hidden;background:#eee;box-shadow:0 14px 34px rgba(23,52,75,.10)}
+.church-photo img{width:100%;height:360px;object-fit:cover;display:block}
+.church-copy h2{margin:0 0 16px;font-family:Georgia,"Times New Roman",serif;color:var(--navy-deep);font-size:clamp(2rem,3vw,3rem);line-height:1.08;font-weight:500}
+.church-copy p{color:var(--ink);font-size:1.02rem;line-height:1.75;margin:0 0 14px}
+.church-details{margin-top:20px;padding:18px 20px;background:#fff;border:1px solid var(--line);border-radius:14px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 24px}
+.church-details p{margin:0;font-size:.96rem}.church-details strong{color:var(--navy-deep)}.church-details a{color:var(--navy);font-weight:700}
+@media(max-width:800px){.churches-body .nav-wrap{flex-direction:column;text-align:center}.church-entry{grid-template-columns:1fr;gap:24px}.church-entry.reverse .church-photo,.church-entry.reverse .church-copy{order:initial}.church-photo img{height:300px}.church-details{grid-template-columns:1fr}.churches-page{padding-top:50px}}
