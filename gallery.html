@@ -1,30 +1,18 @@
 <!doctype html>
 <html lang="mt">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Gallerija | Parroċċa San Ġużepp - Msida</title>
 <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-<header class="topbar gallery-topbar">
-  <div class="container topbar-inner">
-    <a class="brand" href="index.html">
-      <span class="brand-mark" aria-hidden="true">✦</span>
-      <span><span class="brand-small">Parroċċa Arċipretali</span><strong>San Ġużepp - Msida</strong></span>
-    </a>
-    <nav class="nav"><a href="index.html">← Lura għall-Ewlenija</a></nav>
-  </div>
-</header>
-<main>
-  <section class="section gallery-page">
-    <div class="container">
-      <div class="section-head centered">
-        <span class="kicker dark">Ritratti mill-Komunità</span>
-        <h2>Gallerija tar-Ritratti</h2>
-        <p>Mumenti mill-ħajja, ċelebrazzjonijiet u attivitajiet tal-Parroċċa.</p>
-      </div>
-      <div class="photo-grid">
+<body class="gallery-body">
+<header class="site-header"><div class="nav-wrap">
+<a class="brand" href="index.html"><span class="brand-mark">✦</span><span><small>PARROĊĊA ARĊIPRETALI</small><strong>San Ġużepp - Msida</strong></span></a>
+<nav><a href="index.html">← Lura għall-Ewlenija</a></nav>
+</div></header>
+<main><section class="section gallery-page">
+<div class="section-heading"><div><span class="eyebrow">RITRATTI MILL-KOMUNITÀ</span><h1>Gallerija tar-Ritratti</h1></div><p>Mumenti mill-ħajja, ċelebrazzjonijiet u attivitajiet tal-Parroċċa.</p></div>
+<div class="photo-grid">
 <button class="photo-card" type="button" onclick="openPhoto('ritratt-01.jpg')"><img src="ritratt-01.jpg" alt="Ritratt mill-ħajja tal-Parroċċa" loading="lazy"></button>
 <button class="photo-card" type="button" onclick="openPhoto('ritratt-02.jpg')"><img src="ritratt-02.jpg" alt="Ritratt mill-ħajja tal-Parroċċa" loading="lazy"></button>
 <button class="photo-card" type="button" onclick="openPhoto('ritratt-03.jpg')"><img src="ritratt-03.jpg" alt="Ritratt mill-ħajja tal-Parroċċa" loading="lazy"></button>
@@ -42,10 +30,7 @@
 <button class="photo-card" type="button" onclick="openPhoto('ritratt-15.jpeg')"><img src="ritratt-15.jpeg" alt="Ritratt mill-ħajja tal-Parroċċa" loading="lazy"></button>
 <button class="photo-card" type="button" onclick="openPhoto('ritratt-16.jpeg')"><img src="ritratt-16.jpeg" alt="Ritratt mill-ħajja tal-Parroċċa" loading="lazy"></button>
 <button class="photo-card" type="button" onclick="openPhoto('ritratt-17.jpeg')"><img src="ritratt-17.jpeg" alt="Ritratt mill-ħajja tal-Parroċċa" loading="lazy"></button>
-      </div>
-    </div>
-  </section>
-</main>
+</div></section></main>
 <div id="lightbox" class="lightbox" aria-hidden="true" onclick="closePhoto(event)">
 <button class="lightbox-close" type="button" aria-label="Agħlaq" onclick="closePhoto(event)">×</button>
 <button class="lightbox-prev" type="button" aria-label="Ritratt ta’ qabel" onclick="changePhoto(-1,event)">‹</button>

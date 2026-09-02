@@ -173,7 +173,7 @@ a{color:inherit}
   text-align:center;
 }
 .mass-card span{display:block;color:#cbd7df;margin-bottom:8px}
-.mass-card strong{.mass-card strong{
+.mass-card strong{
   display:block;
   font-size:2rem;
   line-height:1.35;
@@ -341,45 +341,172 @@ footer a{color:var(--gold-soft);text-decoration:none;font-weight:800}
 .activity-date { font-weight:800; letter-spacing:.04em; color:#9b7134; text-transform:uppercase; }
 
 /* Gallerija tar-ritratti */
-.gallery-topbar .topbar-inner{
-  justify-content:center;
-  flex-direction:column;
-  gap:8px;
-  padding:14px 0;
+.gallery-body .site-header{
+  background:var(--paper);
+  border-bottom:1px solid var(--line);
 }
-.gallery-topbar .brand{text-decoration:none}
-.gallery-topbar .nav{justify-content:center}
-.gallery-page{min-height:75vh;padding-top:70px}
-.gallery-page .section-head{margin-bottom:30px}
+.gallery-body .nav-wrap{
+  width:min(1160px,92%);
+  margin:0 auto;
+  padding:22px 0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  text-align:center;
+}
+.gallery-body .brand{
+  text-decoration:none;
+  justify-content:center;
+}
+.gallery-body .brand span:last-child{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.gallery-body .brand small{
+  display:block;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-size:.67rem;
+  color:var(--gold);
+  font-weight:800;
+}
+.gallery-body .site-header nav a{
+  color:var(--navy);
+  text-decoration:none;
+  font-weight:700;
+}
+.gallery-body .site-header nav a:hover{color:var(--gold)}
+
+.gallery-page{
+  min-height:75vh;
+  width:min(1160px,92%);
+  margin:0 auto;
+  padding:72px 0 90px;
+}
+.gallery-page .section-heading{
+  max-width:780px;
+  margin:0 auto 36px;
+  text-align:center;
+}
+.gallery-page .section-heading .eyebrow{
+  display:block;
+  color:var(--gold);
+  font-size:.76rem;
+  font-weight:800;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+.gallery-page .section-heading h1{
+  margin:0;
+  font-family:Georgia,"Times New Roman",serif;
+  color:var(--navy-deep);
+  font-size:clamp(2.4rem,5vw,4rem);
+  line-height:1.05;
+  font-weight:500;
+}
+.gallery-page .section-heading p{
+  margin:14px 0 0;
+  color:var(--muted);
+  font-size:1.02rem;
+}
+
 .photo-grid{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
   gap:16px;
 }
 .photo-card{
+  display:block;
+  width:100%;
   border:0;
   padding:0;
   background:#fff;
   border-radius:14px;
   overflow:hidden;
   cursor:pointer;
-  box-shadow:0 10px 30px rgba(20,49,70,.10);
-  aspect-ratio:4/3;
+  box-shadow:0 10px 28px rgba(20,49,70,.10);
   transition:transform .2s ease,box-shadow .2s ease;
 }
-.photo-card:hover{transform:translateY(-3px);box-shadow:0 16px 36px rgba(20,49,70,.16)}
-.photo-card img{width:100%;height:100%;object-fit:cover;display:block}
-.lightbox{position:fixed;inset:0;background:rgba(5,18,28,.94);z-index:9999;display:none;align-items:center;justify-content:center;padding:28px}
+.photo-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 15px 34px rgba(20,49,70,.16);
+}
+.photo-card img{
+  width:100%;
+  height:190px;
+  object-fit:cover;
+  display:block;
+}
+
+.lightbox{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:28px 84px;
+  background:rgba(5,18,28,.94);
+}
 .lightbox.show{display:flex}
-.lightbox img{max-width:min(1200px,88vw);max-height:88vh;object-fit:contain;border-radius:10px;box-shadow:0 20px 70px rgba(0,0,0,.45)}
-.lightbox-close,.lightbox-prev,.lightbox-next{position:fixed;border:0;background:rgba(255,255,255,.10);color:#fff;cursor:pointer;border-radius:999px;display:grid;place-items:center}
-.lightbox-close{top:18px;right:24px;width:50px;height:50px;font-size:2.4rem;line-height:1}
-.lightbox-prev,.lightbox-next{top:50%;transform:translateY(-50%);width:56px;height:56px;font-size:3rem;line-height:1}
-.lightbox-prev{left:24px}.lightbox-next{right:24px}
-@media(max-width:900px){.photo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.lightbox img{
+  max-width:min(1200px,90vw);
+  max-height:90vh;
+  object-fit:contain;
+  border-radius:10px;
+  box-shadow:0 20px 70px rgba(0,0,0,.45);
+}
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next{
+  position:fixed;
+  border:0;
+  background:rgba(255,255,255,.10);
+  color:#fff;
+  cursor:pointer;
+  display:grid;
+  place-items:center;
+}
+.lightbox-close{
+  top:18px;
+  right:24px;
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  font-size:2.4rem;
+  line-height:1;
+}
+.lightbox-prev,
+.lightbox-next{
+  top:50%;
+  transform:translateY(-50%);
+  width:54px;
+  height:70px;
+  border-radius:14px;
+  font-size:3rem;
+  line-height:1;
+}
+.lightbox-prev{left:18px}
+.lightbox-next{right:18px}
+.lightbox-close:hover,
+.lightbox-prev:hover,
+.lightbox-next:hover{background:rgba(255,255,255,.20)}
+
+@media(max-width:900px){
+  .photo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .photo-card img{height:200px}
+}
 @media(max-width:560px){
-  .gallery-page{padding-top:48px}
+  .gallery-body .nav-wrap{padding:16px 0}
+  .gallery-page{padding:52px 0 70px}
   .photo-grid{grid-template-columns:1fr;gap:14px}
-  .lightbox{padding:12px}
-  .lightbox-prev{left:8px}.lightbox-next{right:8px}
+  .photo-card img{height:230px}
+  .lightbox{padding:64px 12px 20px}
+  .lightbox-prev,.lightbox-next{width:44px;height:58px;font-size:2.5rem}
+  .lightbox-prev{left:8px}
+  .lightbox-next{right:8px}
 }
