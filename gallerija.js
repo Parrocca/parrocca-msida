@@ -8,7 +8,7 @@ function escapeHtml(value) {
 async function loadGallery() {
   const grid = document.getElementById('photo-grid');
   try {
-    const response = await fetch('gallerija.txt', { cache: 'no-store' });
+    const response = await fetch('./gallerija.txt?v=' + Date.now(), { cache: 'no-store' });
     if (!response.ok) throw new Error('Ma setax jinqara gallerija.txt');
     const text = await response.text();
     photos = text.split(/\r?\n/)
@@ -21,7 +21,7 @@ async function loadGallery() {
 
     grid.innerHTML = photos.map((photo, index) => `
       <button class="photo-card" type="button" data-index="${index}" aria-label="${escapeHtml(photo.caption)}">
-        <img src="${escapeHtml(photo.file)}" alt="${escapeHtml(photo.caption)}" loading="lazy">
+        <img src="./${escapeHtml(photo.file)}" alt="${escapeHtml(photo.caption)}" loading="lazy">
       </button>`).join('');
 
     grid.addEventListener('click', event => {
