@@ -1,27 +1,42 @@
 let photos = [];
 let currentPhoto = 0;
 
-function escapeHtml(value) {
-  return value.replace(/[&<>'"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));
+const GITHUB_API = 'https://api.github.com/repos/Parrocca/parrocca-msida/contents/gallery';
+const IMAGE_EXTENSIONS = /\.(jpe?g|png|webp|gif)$/i;
+
+function niceCaption(filename) {
+  return filename
+    .replace(/\.[^.]+$/, '')
+    .replace(/[-_]+/g, ' ')
+    .replace(/\b\w/g, letter => letter.toUpperCase());
 }
 
 async function loadGallery() {
   const grid = document.getElementById('photo-grid');
   try {
-    const response = await fetch('./gallerija.txt?v=' + Date.now(), { cache: 'no-store' });
-    if (!response.ok) throw new Error('Ma setax jinqara gallerija.txt');
-    const text = await response.text();
-    photos = text.split(/\r?\n/)
-      .map(line => line.trim())
-      .filter(line => line && !line.startsWith('#'))
-      .map(line => {
-        const [file, ...rest] = line.split('|');
-        return { file: file.trim(), caption: (rest.join('|').trim() || 'Ritratt mill-ħajja tal-Parroċċa') };
-      });
+    const response = await fetch(GITHUB_API, {
+      headers: { 'Accept': 'application/vnd.github+json' },
+      cache: 'no-store'
+    });
+    if (!response.ok) throw new Error('Ma setax jinqara l-folder gallery.');
+
+    const files = await response.json();
+    photos = files
+      .filter(item => item.type === 'file' && IMAGE_EXTENSIONS.test(item.name))
+      .sort((a, b) => a.name.localeCompare(b.name, 'mt', { numeric: true }))
+      .map(item => ({
+        file: item.download_url,
+        caption: niceCaption(item.name)
+      }));
+
+    if (!photos.length) {
+      grid.innerHTML = '<p>Għad m’hemmx ritratti fil-gallerija.</p>';
+      return;
+    }
 
     grid.innerHTML = photos.map((photo, index) => `
-      <button class="photo-card" type="button" data-index="${index}" aria-label="${escapeHtml(photo.caption)}">
-        <img src="./${escapeHtml(photo.file)}" alt="${escapeHtml(photo.caption)}" loading="lazy">
+      <button class="photo-card" type="button" data-index="${index}" aria-label="${photo.caption}">
+        <img src="${photo.file}" alt="${photo.caption}" loading="lazy">
       </button>`).join('');
 
     grid.addEventListener('click', event => {
@@ -29,7 +44,7 @@ async function loadGallery() {
       if (button) openPhoto(Number(button.dataset.index));
     });
   } catch (error) {
-    grid.innerHTML = '<p>Il-gallerija ma setgħetx titgħabba bħalissa.</p>';
+    grid.innerHTML = '<p>Il-gallerija ma setgħetx titgħabba bħalissa. Erġa’ pprova aktar tard.</p>';
     console.error(error);
   }
 }
