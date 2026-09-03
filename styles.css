@@ -812,3 +812,12 @@ footer a{color:var(--gold-soft);text-decoration:none;font-weight:800}
   .pdf-pages{margin-top:18px;gap:12px}
   .pdf-page-canvas{border-radius:6px}
 }
+
+
+/* Attivitajiet PDF - upload faċli */
+.activity-pdf-card{overflow:visible}
+.activity-pdf-pages{width:min(100%,900px);margin:24px auto 18px;display:grid;gap:18px}
+.activity-pdf-loading,.activity-pdf-error{padding:30px 20px;text-align:center;background:var(--paper);color:var(--navy-deep);border-radius:14px}
+.activity-pdf-canvas{display:block;width:100%;height:auto;margin:0 auto;background:#fff;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.14)}
+.activity-pdf-card .btn{display:inline-block;margin-top:8px}
+@media(max-width:620px){.activity-pdf-pages{margin-top:18px;gap:12px}.activity-pdf-canvas{border-radius:6px}.activity-pdf-card .btn{width:100%;text-align:center}}
