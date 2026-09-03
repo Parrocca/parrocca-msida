@@ -25,8 +25,7 @@
   }
 
   function pdfCard(x){
-    const url='./'+encodeURIComponent(x.name);
-    return `<article class="activity-card activity-pdf-card"><div class="activity-date">${esc(dateLabel(x.d))}</div><h2>${esc(x.titlu||'Attività tal-Parroċċa')}</h2>${x.desc?`<p>${esc(x.desc)}</p>`:''}<p><a class="btn btn-primary" href="${url}" target="_blank" rel="noopener">Iftaħ il-PDF</a></p></article>`;
+    return `<article class="activity-card activity-pdf-card"><div class="activity-date">${esc(dateLabel(x.d))}</div><h2>${esc(x.titlu||'Attività tal-Parroċċa')}</h2>${x.desc?`<p>${esc(x.desc)}</p>`:''}</article>`;
   }
 
   let pdfJsPromise;
@@ -131,7 +130,7 @@
       }
 
       archiveEl.innerHTML=past.length?past.map(x=>x.kind==='pdf'
-        ?`<details class="activity-archive-item"><summary>${esc(dateLabel(x.d))} — ${esc(x.titlu||'Attività tal-Parroċċa')}</summary><div>${x.desc?`<p>${esc(x.desc)}</p>`:''}<p><a class="btn btn-primary" href="./${encodeURIComponent(x.name)}" target="_blank" rel="noopener">Iftaħ il-PDF</a></p></div></details>`
+        ?`<details class="activity-archive-item"><summary>${esc(dateLabel(x.d))} — ${esc(x.titlu||'Attività tal-Parroċċa')}</summary><div>${x.desc?`<p>${esc(x.desc)}</p>`:''}</div></details>`
         :`<details class="activity-archive-item"><summary>${esc(x.data)} — ${esc(x.titlu)}</summary><div>${x.hin?`<p><strong>Ħin:</strong> ${esc(x.hin)}</p>`:''}${x.desc?`<p>${esc(x.desc)}</p>`:''}</div></details>`).join('')
         :"<p>Għad m'hemmx attivitajiet fl-arkivju.</p>";
     }catch(e){
