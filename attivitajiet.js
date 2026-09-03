@@ -9,7 +9,7 @@
   function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
   function getTextDate(s){const m=String(s||'').toLowerCase().match(/(\d{1,2})\s+(?:ta'|t')?\s*([a-zà-ż]+)\s+(\d{4})/i);return m&&months[m[2]]!==undefined?new Date(+m[3],months[m[2]],+m[1]):null;}
   function pdfDate(name){const m=name.match(PDF_FILE);return m?new Date(+m[1],+m[2]-1,+m[3]):null;}
-  function dateLabel(d){return new Intl.DateTimeFormat('mt-MT',{day:'numeric',month:'long',year:'numeric'}).format(d);}
+  function dateLabel(d){const m=['JANNAR','FRAR','MARZU','APRIL','MEJJU','ĠUNJU','LULJU','AWWISSU','SETTEMBRU','OTTUBRU','NOVEMBRU','DIĊEMBRU'];return `${d.getDate()} TA' ${m[d.getMonth()]} ${d.getFullYear()}`;}
 
   function parseText(text){
     return text.split(/\n---\s*\n?/).map(b=>b.trim()).filter(Boolean).map(b=>{
@@ -43,21 +43,45 @@
   function textItemsToLines(items){
     const rows=[];
     for(const it of items){
-      const s=String(it.str||'').trim();
-      if(!s) continue;
+      const s=String(it.str||'');
+      if(!s.trim()) continue;
       const y=it.transform&&it.transform.length>5?it.transform[5]:0;
-      let row=rows.find(r=>Math.abs(r.y-y)<3);
+      const x=it.transform&&it.transform.length>4?it.transform[4]:0;
+      const width=Number(it.width||0);
+      const height=Math.abs(Number(it.height||it.transform?.[3]||12));
+      let row=rows.find(r=>Math.abs(r.y-y)<Math.max(2.5,height*0.20));
       if(!row){ row={y,parts:[]}; rows.push(row); }
-      row.parts.push({x:it.transform&&it.transform.length>4?it.transform[4]:0,s});
+      row.parts.push({x,width,height,s});
     }
-    return rows.sort((a,b)=>b.y-a.y).map(r=>r.parts.sort((a,b)=>a.x-b.x).map(p=>p.s).join(' ').replace(/\s+/g,' ').trim()).filter(Boolean);
+    return rows.sort((a,b)=>b.y-a.y).map(r=>{
+      const parts=r.parts.sort((a,b)=>a.x-b.x);
+      let out='';
+      let prev=null;
+      for(const p of parts){
+        const txt=p.s.trim();
+        if(!txt) continue;
+        if(prev){
+          const prevEnd=prev.x+prev.width;
+          const gap=p.x-prevEnd;
+          const threshold=Math.max(1.2,Math.min(prev.height,p.height)*0.16);
+          // PDF text is often split inside a word. Add a space only when
+          // the visual gap is large enough to be a real word-space.
+          if(gap>threshold && !/^[,.;:!?%)\]’']/.test(txt) && !/[(/\-–—]$/.test(out)) out+=' ';
+        }
+        out+=txt;
+        prev=p;
+      }
+      return out.replace(/\s+([,.;:!?])/g,'$1')
+                .replace(/\s*[-–—]\s*/g,'-')
+                .replace(/\s+/g,' ').trim();
+    }).filter(Boolean);
   }
 
   function cleanPdfTitle(line){
     if(!line) return '';
     let t=line.replace(/^\s*Nhar\s+/i,'').trim();
-    // Remove a leading weekday/date phrase, keeping the actual event title.
-    t=t.replace(/^.*?\b\d{1,2}\s+ta[’']?\s+[A-Za-zÀ-ÿ-]+\s+\d{4}\s*/i,'').trim();
+    // Neħħi l-parti "il-Ħadd 4 ta’ Ottubru 2026" u ħalli t-titlu tal-attività.
+    t=t.replace(/^.*?\b\d{1,2}\s+ta[’'`]?(?:\s+)?[A-Za-zÀ-ÿ-]+\s+\d{4}\s*/i,'').trim();
     t=t.replace(/^[-–—:;,\.\s]+/,'').trim();
     return t;
   }
