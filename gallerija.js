@@ -1,7 +1,7 @@
 let photos = [];
 let currentPhoto = 0;
 
-const GITHUB_API = 'https://api.github.com/repos/Parrocca/parrocca-msida/contents/gallery';
+const GITHUB_API = 'https://api.github.com/repos/Parrocca/parrocca-msida/contents';
 const IMAGE_EXTENSIONS = /\.(jpe?g|png|webp|gif)$/i;
 
 function niceCaption(filename) {
@@ -18,11 +18,11 @@ async function loadGallery() {
       headers: { 'Accept': 'application/vnd.github+json' },
       cache: 'no-store'
     });
-    if (!response.ok) throw new Error('Ma setax jinqara l-folder gallery.');
+    if (!response.ok) throw new Error('Ma setgħux jinqraw ir-ritratti tal-gallerija.');
 
     const files = await response.json();
     photos = files
-      .filter(item => item.type === 'file' && IMAGE_EXTENSIONS.test(item.name))
+      .filter(item => item.type === 'file' && IMAGE_EXTENSIONS.test(item.name) && (/^ritratt-/i.test(item.name) || /^gallery-/i.test(item.name) || item.name === 'san-guzepp-purcissjoni.png'))
       .sort((a, b) => a.name.localeCompare(b.name, 'mt', { numeric: true }))
       .map(item => ({
         file: item.download_url,
