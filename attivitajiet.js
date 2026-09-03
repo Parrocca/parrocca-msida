@@ -22,6 +22,7 @@
     const [txtRes,apiRes]=await Promise.all([fetch('attivitajiet.txt?ts='+Date.now(),{cache:'no-store'}),fetch(GITHUB_API+'?ts='+Date.now(),{headers:{Accept:'application/vnd.github+json'},cache:'no-store'})]);
     const textItems=txtRes.ok?parseText(await txtRes.text()):[];
     const files=apiRes.ok?(await apiRes.json()).filter(x=>x.type==='file'&&PDF_FILE.test(x.name)).map(x=>({kind:'pdf',name:x.name,d:pdfDate(x.name)})):[];
+    // L-attività tibqa' attiva matul il-ġurnata kollha tagħha; tmur fl-arkivju mill-għada.
     let today=new Date();today.setHours(0,0,0,0);
     const all=[...textItems,...files];
     const future=all.filter(x=>!x.d||x.d>=today).sort((a,b)=>(a.d||new Date(8640000000000000))-(b.d||new Date(8640000000000000)));
