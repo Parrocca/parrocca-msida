@@ -897,3 +897,23 @@ footer a{color:var(--gold-soft);text-decoration:none;font-weight:800}
   margin:8px auto 0;
   display:inline-block;
 }
+
+/* Home: innaqqsu l-ispazju vojt qabel il-footer */
+.activities-home{
+  padding:56px 4% 62px;
+  text-align:center;
+}
+.activities-home .section-heading{
+  max-width:760px;
+  margin:0 auto 24px;
+  display:block;
+}
+.activities-home .section-heading > div{
+  margin:0 auto;
+}
+.activities-home .section-heading p{
+  margin:14px auto 0;
+}
+@media(max-width:620px){
+  .activities-home{padding:42px 5% 46px}
+}
