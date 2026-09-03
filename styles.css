@@ -871,3 +871,12 @@ footer a{color:var(--gold-soft);text-decoration:none;font-weight:800}
 .links-note{text-align:center;color:var(--muted);margin:34px 0 0}
 @media(max-width:760px){.links-page{padding:52px 0 70px}.useful-links-grid{grid-template-columns:1fr}.useful-link-card{padding:24px 20px}}
 @media(max-width:520px){.useful-link-card{display:block}.useful-link-symbol{margin-bottom:16px}.useful-link-card .btn{width:100%;text-align:center}}
+
+/* Footer: informazzjoni tal-parrocca centrata, filwaqt li "Lura fuq" jibqa' fuq il-lemin */
+.footer-inner{position:relative;justify-content:center;text-align:center}
+.footer-inner > div{margin:0 auto}
+.footer-inner > a{position:absolute;right:0}
+@media (max-width:900px){
+  .footer-inner{align-items:center;flex-direction:column;text-align:center}
+  .footer-inner > a{position:static;margin-top:12px}
+}
