@@ -24,12 +24,9 @@
     return `<article class="activity-card"><div class="activity-date">${esc(x.data)}${x.hin?' · '+esc(x.hin):''}</div><h2>${esc(x.titlu)}</h2>${x.desc?`<p>${esc(x.desc)}</p>`:''}</article>`;
   }
 
-  function pdfCard(x, featured){
+  function pdfCard(x){
     const url='./'+encodeURIComponent(x.name);
-    if(!featured){
-      return `<article class="activity-card activity-pdf-card"><div class="activity-date">${esc(dateLabel(x.d))}</div><h2>Attività tal-Parroċċa</h2><p><a class="btn btn-primary" href="${url}" target="_blank" rel="noopener">Iftaħ il-PDF f’paġna ġdida</a></p></article>`;
-    }
-    return `<article class="activity-card activity-pdf-card"><div class="activity-date">${esc(dateLabel(x.d))}</div><h2>Attività tal-Parroċċa</h2><p>Id-dettalji tal-attività jidhru hawn taħt.</p><div class="activity-pdf-pages" data-pdf-src="${url}"><div class="activity-pdf-loading">Qed tinfetaħ l-attività…</div></div><p><a class="btn btn-primary" href="${url}" target="_blank" rel="noopener">Iftaħ il-PDF f’paġna ġdida</a></p></article>`;
+    return `<article class="activity-card activity-pdf-card"><div class="activity-date">${esc(dateLabel(x.d))}</div><h2>${esc(x.titlu||'Attività tal-Parroċċa')}</h2>${x.desc?`<p>${esc(x.desc)}</p>`:''}<p><a class="btn btn-primary" href="${url}" target="_blank" rel="noopener">Iftaħ il-PDF</a></p></article>`;
   }
 
   let pdfJsPromise;
@@ -43,29 +40,47 @@
     return pdfJsPromise;
   }
 
-  async function renderPdfs(){
-    const holders=[...listEl.querySelectorAll('.activity-pdf-pages[data-pdf-src]')];
-    for(const holder of holders){
-      try{
-        const lib=await getPdfJs();
-        const pdf=await lib.getDocument(holder.dataset.pdfSrc).promise;
-        holder.innerHTML='';
-        for(let n=1;n<=pdf.numPages;n++){
-          const page=await pdf.getPage(n);
-          const viewport=page.getViewport({scale:1.7});
-          const canvas=document.createElement('canvas');
-          const ctx=canvas.getContext('2d',{alpha:false});
-          canvas.width=Math.floor(viewport.width);
-          canvas.height=Math.floor(viewport.height);
-          canvas.className='activity-pdf-canvas';
-          canvas.setAttribute('aria-label',`Paġna ${n} tal-attività`);
-          holder.appendChild(canvas);
-          await page.render({canvasContext:ctx,viewport}).promise;
-        }
-      }catch(e){
-        console.error('Activity PDF preview error:',e);
-        holder.innerHTML='<p class="activity-pdf-error">Ma stajniex nuru l-PDF direttament. Uża l-buttuna hawn taħt.</p>';
+  function textItemsToLines(items){
+    const rows=[];
+    for(const it of items){
+      const s=String(it.str||'').trim();
+      if(!s) continue;
+      const y=it.transform&&it.transform.length>5?it.transform[5]:0;
+      let row=rows.find(r=>Math.abs(r.y-y)<3);
+      if(!row){ row={y,parts:[]}; rows.push(row); }
+      row.parts.push({x:it.transform&&it.transform.length>4?it.transform[4]:0,s});
+    }
+    return rows.sort((a,b)=>b.y-a.y).map(r=>r.parts.sort((a,b)=>a.x-b.x).map(p=>p.s).join(' ').replace(/\s+/g,' ').trim()).filter(Boolean);
+  }
+
+  function cleanPdfTitle(line){
+    if(!line) return '';
+    let t=line.replace(/^\s*Nhar\s+/i,'').trim();
+    // Remove a leading weekday/date phrase, keeping the actual event title.
+    t=t.replace(/^.*?\b\d{1,2}\s+ta[’']?\s+[A-Za-zÀ-ÿ-]+\s+\d{4}\s*/i,'').trim();
+    t=t.replace(/^[-–—:;,\.\s]+/,'').trim();
+    return t;
+  }
+
+  async function readPdfDetails(file){
+    const url='./'+encodeURIComponent(file.name);
+    try{
+      const lib=await getPdfJs();
+      const pdf=await lib.getDocument(url).promise;
+      const lines=[];
+      for(let n=1;n<=Math.min(pdf.numPages,2);n++){
+        const page=await pdf.getPage(n);
+        const content=await page.getTextContent();
+        lines.push(...textItemsToLines(content.items));
       }
+      const useful=lines.map(x=>x.trim()).filter(Boolean);
+      const first=useful[0]||'';
+      const title=cleanPdfTitle(first)||'Attività tal-Parroċċa';
+      const desc=useful.slice(1,4).join(' ').replace(/\s+/g,' ').trim();
+      return {...file,titlu:title,desc};
+    }catch(e){
+      console.warn('Ma rnexxiex naqra t-test tal-PDF:',file.name,e);
+      return {...file,titlu:'Attività tal-Parroċċa',desc:'Agħfas il-buttuna biex tiftaħ id-dettalji tal-attività.'};
     }
   }
 
@@ -76,7 +91,8 @@
         fetch(GITHUB_API+'?ts='+Date.now(),{headers:{Accept:'application/vnd.github+json'},cache:'no-store'})
       ]);
       const textItems=txtRes.ok?parseText(await txtRes.text()):[];
-      const files=apiRes.ok?(await apiRes.json()).filter(x=>x.type==='file'&&PDF_FILE.test(x.name)).map(x=>({kind:'pdf',name:x.name,d:pdfDate(x.name)})):[];
+      const rawFiles=apiRes.ok?(await apiRes.json()).filter(x=>x.type==='file'&&PDF_FILE.test(x.name)).map(x=>({kind:'pdf',name:x.name,d:pdfDate(x.name)})):[];
+      const files=await Promise.all(rawFiles.map(readPdfDetails));
 
       const today=new Date();
       today.setHours(0,0,0,0);
@@ -87,12 +103,11 @@
       if(!future.length){
         listEl.innerHTML='<article class="activity-card"><h2>Għad m’hemmx attivitajiet imħabbra.</h2></article>';
       }else{
-        listEl.innerHTML=future.map(x=>x.kind==='pdf'?pdfCard(x,true):textCard(x)).join('');
-        await renderPdfs();
+        listEl.innerHTML=future.map(x=>x.kind==='pdf'?pdfCard(x):textCard(x)).join('');
       }
 
       archiveEl.innerHTML=past.length?past.map(x=>x.kind==='pdf'
-        ?`<details class="activity-archive-item"><summary>${esc(dateLabel(x.d))} — Attività tal-Parroċċa (PDF)</summary><div>${pdfCard(x,false)}</div></details>`
+        ?`<details class="activity-archive-item"><summary>${esc(dateLabel(x.d))} — ${esc(x.titlu||'Attività tal-Parroċċa')}</summary><div>${x.desc?`<p>${esc(x.desc)}</p>`:''}<p><a class="btn btn-primary" href="./${encodeURIComponent(x.name)}" target="_blank" rel="noopener">Iftaħ il-PDF</a></p></div></details>`
         :`<details class="activity-archive-item"><summary>${esc(x.data)} — ${esc(x.titlu)}</summary><div>${x.hin?`<p><strong>Ħin:</strong> ${esc(x.hin)}</p>`:''}${x.desc?`<p>${esc(x.desc)}</p>`:''}</div></details>`).join('')
         :"<p>Għad m'hemmx attivitajiet fl-arkivju.</p>";
     }catch(e){
