@@ -821,3 +821,30 @@ footer a{color:var(--gold-soft);text-decoration:none;font-weight:800}
 .activity-pdf-canvas{display:block;width:100%;height:auto;margin:0 auto;background:#fff;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.14)}
 .activity-pdf-card .btn{display:inline-block;margin-top:8px}
 @media(max-width:620px){.activity-pdf-pages{margin-top:18px;gap:12px}.activity-pdf-canvas{border-radius:6px}.activity-pdf-card .btn{width:100%;text-align:center}}
+
+
+/* Attivitajiet PDF - paġna sħiħa, kbira u ċċentrata */
+.activity-pdf-card{padding-left:28px;padding-right:28px}
+.activity-pdf-pages{
+  width:100%;
+  max-width:none;
+  margin:28px auto 18px;
+  display:grid;
+  gap:24px;
+  justify-items:center;
+}
+.activity-pdf-canvas{
+  display:block;
+  width:100%;
+  max-width:1100px;
+  height:auto;
+  margin:0 auto;
+  background:#fff;
+  border-radius:10px;
+  box-shadow:0 10px 30px rgba(0,0,0,.14);
+}
+@media(max-width:700px){
+  .activity-pdf-card{padding-left:14px;padding-right:14px}
+  .activity-pdf-pages{margin-top:18px;gap:14px}
+  .activity-pdf-canvas{width:100%;max-width:100%;border-radius:6px}
+}
