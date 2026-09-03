@@ -2,7 +2,7 @@
   const latestEl = document.getElementById('latest-notice');
   const archiveEl = document.getElementById('notice-archive');
   const GITHUB_API = 'https://api.github.com/repos/Parrocca/parrocca-msida/contents';
-  const NOTICE_FILE = /^avviz-(\d{4})-(\d{2})-(\d{2})\.(txt|jpe?g|png|webp)$/i;
+  const NOTICE_FILE = /^avviz-(\d{4})-(\d{2})-(\d{2})\.(txt|jpe?g|png|webp|pdf)$/i;
 
   function escapeHtml(value) {
     return String(value || '').replace(/[&<>'"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));
@@ -57,16 +57,28 @@
     </article>`;
   }
 
+  function pdfCard(item, featured) {
+    const date = dateFromName(item.name);
+    return `<article class="notice ${featured ? 'featured latest-dynamic' : 'archive-card'}">
+      ${date ? `<span class="pill">${escapeHtml(date)}</span>` : ''}
+      <h3>Avviżi Parrokkjali</h3>
+      <p>L-avviżi ta’ din il-ġimgħa huma disponibbli bħala PDF.</p>
+      <p><a class="btn btn-primary" href="${item.download_url}" target="_blank" rel="noopener">Iftaħ l-Avviżi (PDF)</a></p>
+    </article>`;
+  }
+
   async function loadItem(item) {
     if (/\.txt$/i.test(item.name)) {
       const r = await fetch(item.download_url + '?ts=' + Date.now(), { cache:'no-store' });
       if (!r.ok) throw new Error('Ma setax jinqara ' + item.name);
       return { item, notice: parseText(await r.text(), dateFromName(item.name)), image:false };
     }
-    return { item, image:true };
+    if (/\.pdf$/i.test(item.name)) return { item, pdf:true, image:false };
+    return { item, image:true, pdf:false };
   }
 
   function render(data, featured) {
+    if (data.pdf) return pdfCard(data.item, featured);
     return data.image ? imageCard(data.item, featured) : textCard(data.notice, featured);
   }
 
@@ -90,8 +102,8 @@
         return;
       }
       archiveEl.innerHTML = data.slice(1).map(d => {
-        const label = d.image ? dateFromName(d.item.name) : (d.notice.data || 'Avviż preċedenti');
-        const title = d.image ? 'Avviż Parrokkjali' : d.notice.titlu;
+        const label = (d.image || d.pdf) ? dateFromName(d.item.name) : (d.notice.data || 'Avviż preċedenti');
+        const title = d.pdf ? 'Avviżi Parrokkjali (PDF)' : (d.image ? 'Avviż Parrokkjali' : d.notice.titlu);
         return `<details class="archive-item"><summary><span>${escapeHtml(label)}</span><strong>${escapeHtml(title)}</strong></summary><div class="archive-content">${render(d,false)}</div></details>`;
       }).join('');
     } catch (err) {
