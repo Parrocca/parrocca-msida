@@ -781,7 +781,34 @@ footer a{color:var(--gold-soft);text-decoration:none;font-weight:800}
 /* Avviżi b'upload biss */
 .auto-notice-image{display:block;width:100%;max-width:760px;height:auto;margin:18px auto;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.10)}
 
-/* PDF tal-avviżi jidher direttament fil-paġna */
-.notice-pdf-viewer{width:100%;height:min(78vh,900px);min-height:560px;margin:22px 0 14px;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 8px 22px rgba(0,0,0,.12)}
-.notice-pdf-viewer iframe{display:block;width:100%;height:100%;border:0;background:#fff}
-@media(max-width:700px){.notice-pdf-viewer{height:70vh;min-height:480px}}
+/* PDF tal-avviżi - dehra nadifa fil-paġna */
+.pdf-featured{overflow:visible}
+.pdf-pages{
+  width:min(100%,900px);
+  margin:24px auto 14px;
+  display:grid;
+  gap:18px;
+}
+.pdf-loading,.pdf-preview-error{
+  padding:30px 20px;
+  text-align:center;
+  background:#fff;
+  color:var(--navy-deep);
+  border-radius:14px;
+}
+.pdf-page-canvas{
+  display:block;
+  width:100%;
+  height:auto;
+  margin:0 auto;
+  background:#fff;
+  border-radius:10px;
+  box-shadow:0 10px 30px rgba(0,0,0,.18);
+}
+.pdf-open-row{margin-top:18px!important}
+.pdf-featured .notice-image-link{color:var(--gold-soft);font-weight:800;text-decoration:none}
+.pdf-featured .notice-image-link:hover{text-decoration:underline}
+@media(max-width:620px){
+  .pdf-pages{margin-top:18px;gap:12px}
+  .pdf-page-canvas{border-radius:6px}
+}
