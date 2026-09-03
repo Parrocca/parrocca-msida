@@ -12,8 +12,3 @@ ISEM: Kunsill Ekonomiku Parrokkjali
 TIP: OPERATUR
 ISEM: Kummissjoni Djakonija
 ---
----
-TIP: GĦAQDA
-ISEM: Għaqda ta' Prova
-DESKRIZZJONI: Din hija prova biex naraw li s-sistema qed taħdem tajjeb.
-KUNTATT: 1234 5678
