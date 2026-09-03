@@ -59,21 +59,23 @@
 
   function pdfCard(item, featured) {
     const date = dateFromName(item.name);
+    const localUrl = encodeURI(item.name);
     return `<article class="notice ${featured ? 'featured latest-dynamic' : 'archive-card'}">
       ${date ? `<span class="pill">${escapeHtml(date)}</span>` : ''}
       <h3>Avviżi Parrokkjali</h3>
-      <p>L-avviżi ta’ din il-ġimgħa huma disponibbli bħala PDF.</p>
-      <p><a class="btn btn-primary" href="${item.download_url}" target="_blank" rel="noopener">Iftaħ l-Avviżi (PDF)</a></p>
+      ${featured ? `<p>L-avviżi ta’ din il-ġimgħa jidhru hawn taħt.</p>
+      <div class="notice-pdf-viewer"><iframe src="${localUrl}#view=FitH" title="Avviżi Parrokkjali ${escapeHtml(date)}"></iframe></div>` : ''}
+      <p><a class="notice-image-link${featured ? '' : ' dark-link'}" href="${localUrl}" target="_blank" rel="noopener">Iftaħ l-Avviżi (PDF) →</a></p>
     </article>`;
   }
 
   async function loadItem(item) {
+    if (/\.pdf$/i.test(item.name)) return { item, pdf:true };
     if (/\.txt$/i.test(item.name)) {
       const r = await fetch(item.download_url + '?ts=' + Date.now(), { cache:'no-store' });
       if (!r.ok) throw new Error('Ma setax jinqara ' + item.name);
       return { item, notice: parseText(await r.text(), dateFromName(item.name)), image:false };
     }
-    if (/\.pdf$/i.test(item.name)) return { item, pdf:true, image:false };
     return { item, image:true, pdf:false };
   }
 
@@ -103,7 +105,7 @@
       }
       archiveEl.innerHTML = data.slice(1).map(d => {
         const label = (d.image || d.pdf) ? dateFromName(d.item.name) : (d.notice.data || 'Avviż preċedenti');
-        const title = d.pdf ? 'Avviżi Parrokkjali (PDF)' : (d.image ? 'Avviż Parrokkjali' : d.notice.titlu);
+        const title = (d.image || d.pdf) ? 'Avviż Parrokkjali' : d.notice.titlu;
         return `<details class="archive-item"><summary><span>${escapeHtml(label)}</span><strong>${escapeHtml(title)}</strong></summary><div class="archive-content">${render(d,false)}</div></details>`;
       }).join('');
     } catch (err) {
