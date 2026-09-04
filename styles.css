@@ -937,3 +937,22 @@ footer a{color:var(--gold-soft);text-decoration:none;font-weight:800}
 @media (max-width:620px){
   .brand-logo{width:62px;height:62px}
 }
+
+
+/* Iltaqgħu mal-Mulej: uri r-ritratt kollu mingħajr cropping */
+.iltaqghu-body .photo-card{
+  background:#f5f2eb;
+}
+.iltaqghu-body .photo-card img{
+  width:100%;
+  height:340px;
+  object-fit:contain;
+  object-position:center;
+  background:#f5f2eb;
+}
+@media(max-width:900px){
+  .iltaqghu-body .photo-card img{height:360px;}
+}
+@media(max-width:560px){
+  .iltaqghu-body .photo-card img{height:auto;max-height:520px;}
+}
