@@ -22,9 +22,34 @@ async function loadGallery() {
     if (!response.ok) throw new Error('Ma setgħux jinqraw ir-ritratti.');
 
     const files = await response.json();
-    photos = files
-      .filter(item => item.type === 'file' && IMAGE_EXTENSIONS.test(item.name) && /^iltaqghu-/i.test(item.name))
-      .sort((a, b) => a.name.localeCompare(b.name, 'mt', { numeric: true }))
+    const galleryFiles = files.filter(item =>
+      item.type === 'file' && IMAGE_EXTENSIONS.test(item.name) && /^iltaqghu-/i.test(item.name)
+    );
+
+    // Sib id-data tal-aħħar upload/tibdil għal kull ritratt.
+    // B'hekk l-aktar ritratt li ttella' reċentement jidher l-ewwel.
+    const datedFiles = await Promise.all(galleryFiles.map(async item => {
+      try {
+        const commitsUrl = `https://api.github.com/repos/Parrocca/parrocca-msida/commits?path=${encodeURIComponent(item.name)}&per_page=1`;
+        const commitResponse = await fetch(commitsUrl, {
+          headers: { 'Accept': 'application/vnd.github+json' },
+          cache: 'no-store'
+        });
+        if (!commitResponse.ok) throw new Error('Commit date unavailable');
+        const commits = await commitResponse.json();
+        const uploadedAt = commits[0]?.commit?.committer?.date || commits[0]?.commit?.author?.date || '';
+        return { ...item, uploadedAt };
+      } catch (error) {
+        return { ...item, uploadedAt: '' };
+      }
+    }));
+
+    photos = datedFiles
+      .sort((a, b) => {
+        const byDate = (Date.parse(b.uploadedAt) || 0) - (Date.parse(a.uploadedAt) || 0);
+        if (byDate) return byDate;
+        return b.name.localeCompare(a.name, 'mt', { numeric: true });
+      })
       .map(item => ({ file: item.download_url, caption: niceCaption(item.name) }));
 
     if (!photos.length) {
