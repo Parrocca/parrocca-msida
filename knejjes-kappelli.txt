@@ -1,0 +1,28 @@
+TIP: KNISJA
+ISEM: Knisja tal-Kunċizzjoni
+RITRATT: knisja-kuncizzjoni.png
+DESKRIZZJONI1: Il-knisja hi antika ħafna u hi knisja troġloditika, jiġifieri knisja f’għar. Skont Mons. Dusina kienet dedikata lill-Madonna tas-Sokkors. Fl-1640 inbniet mill-ġdid il-parti tal-knisja li tinsab barra mill-għar, u fl-1670 żdiditilha sagristija.
+DESKRIZZJONI2: Fl-1835 l-Imsida saret viċi-parroċċa u fl-1867, meta l-Imsida saret parroċċa, il-Knisja tal-Kunċizzjoni saret il-knisja parrokkjali sakemm inbniet il-Knisja ta’ San Ġużepp.
+---
+TIP: KNISJA
+ISEM: Knisja tas-Sorijiet Franġiskani
+RITRATT: https://parrocci.knisja.mt/wp-content/uploads/2020/11/msida-frangiskani-445x600.jpg
+DESKRIZZJONI1: Fl-1961 is-Sorijiet Franġiskani tal-Qalb ta’ Ġesù fetħu skola fl-Imsida, u l-kappella tal-iskola nfetħet ukoll għan-nies tal-lokalità.
+FACILITAJIET: Arja Kundizzjonata · Kids’ Room
+---
+TIP: KAPPELLA
+ISEM: Kappella tal-Università
+RITRATT: kappella-universita.png
+DESKRIZZJONI1: L-ewwel ġebla tal-Kappella tal-Università tqiegħdet fl-1977. Il-kappella nbniet mill-Knisja f’Malta bħala Ċentru Pastorali għall-ħidma mal-istudenti.
+JISTGHU_JSIRU: Żwiġijiet
+FACILITAJIET: Arja Kundizzjonata
+RETTUR: P. Patrick Magro S.J.
+KUNTATT: 2340 2341
+---
+TIP: KAPPELLA
+ISEM: Kappella taċ-Ċentru
+RITRATT: DIJAGRAMMA
+DESKRIZZJONI1: Il-Kappella taċ-Ċentru toffri spazju għat-talb u l-adorazzjoni matul il-ġimgħa.
+ADORAZZJONI: Mit-Tnejn sal-Ġimgħa: 09:00 – 21:00
+RETTUR: L-Arċipriet
+KUNTATT: 2133 4949
