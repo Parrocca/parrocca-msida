@@ -29,7 +29,7 @@ KUNTATT: 2340 2341
 ---
 TIP: KAPPELLA
 ISEM: Kappella taċ-Ċentru
-RITRATT: DIJAGRAMMA
+RITRATT: centru-ġdid
 DESKRIZZJONI:
 Il-Kappella tal-Adorazzjoni tinsab fuq in-naħa tal-lemin taċ-Ċentru Familja Mqaddsa, fi Triq Johnny Catania, l-Imsida.
 Il-Kappella taċ-Ċentru toffri spazju għat-talb u l-adorazzjoni matul il-ġimgħa.
