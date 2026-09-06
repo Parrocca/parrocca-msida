@@ -1,8 +1,12 @@
 TIP: KNISJA
 ISEM: Knisja tal-Kunċizzjoni
 RITRATT: knisja-kuncizzjoni.png
-DESKRIZZJONI1: Il-knisja hi antika ħafna u hi knisja troġloditika, jiġifieri knisja f’għar. Skont Mons. Dusina kienet dedikata lill-Madonna tas-Sokkors. Fl-1640 inbniet mill-ġdid il-parti tal-knisja li tinsab barra mill-għar, u fl-1670 żdiditilha sagristija.
-DESKRIZZJONI2: Fl-1835 l-Imsida saret viċi-parroċċa u fl-1867, meta l-Imsida saret parroċċa, il-Knisja tal-Kunċizzjoni saret il-knisja parrokkjali sakemm inbniet il-Knisja ta’ San Ġużepp.
+DESKRIZZJONI1: Il-Knisja tal-Kunċizzjoni fl-Imsida, magħrufa wkoll bħala l-Knisja tal-Immakulata Kunċizzjoni, hija knisja żgħira iżda ta’ importanza kbira fl-istorja tal-lokalità.
+
+Il-knisja hija antika ħafna u parti minnha hija trogloditika, jiġifieri tinsab f’għar. Skont ir-rakkont storiku tal-Arċidjoċesi ta’ Malta, fi żmien il-Viżitatur Appostoliku Mons. Pietro Dusina fl-1575 kienet iddedikata lill-Madonna tas-Sokkors. Sorsi akkademiċi wkoll jikkonfermaw li l-knisja tissemma fil-viżta ta’ Dusina tal-1575.
+DESKRIZZJONI2: Fl-1640 reġgħet inbniet il-parti tal-knisja li tinsab barra mill-għar, u fl-1670 żdiditilha sagristija. Hemm ukoll evidenza storika li l-post kellu devozzjoni Marjana antika ħafna u li l-knisja kienet meqjusa bħala wieħed mis-santwarji Marjani ta’ Malta.
+
+Il-knisja kellha rwol importanti ħafna fl-iżvilupp tal-parroċċa. Fl-1835 l-Imsida saret viċi-parroċċa, u meta fl-1867 l-Imsida saret parroċċa, il-Knisja tal-Kunċizzjoni serviet bħala l-ewwel knisja parrokkjali tal-Imsida. Baqgħet taqdi din il-funzjoni sal-1889, meta nfetħet għall-kult il-knisja l-ġdida ddedikata lill-Patroċinju ta’ San Ġużepp, illum il-Knisja Parrokkjali tal-Imsida.
 ---
 TIP: KNISJA
 ISEM: Knisja tas-Sorijiet Franġiskani
