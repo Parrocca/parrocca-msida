@@ -5,16 +5,40 @@
   function esc(s) {
     return String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   }
+
+  const knownKeys = new Set(['TIP','ISEM','RITRATT','DESKRIZZJONI','JISTGHU_JSIRU','FACILITAJIET','ADORAZZJONI','RETTUR','KUNTATT']);
+
   function parse(text) {
     return text.split(/\n\s*---\s*(?:\n|$)/).map(block => {
       const item = {};
-      block.split(/\r?\n/).forEach(line => {
+      const lines = block.replace(/\r/g, '').split('\n');
+      let currentKey = null;
+      let buffer = [];
+
+      function saveCurrent() {
+        if (!currentKey) return;
+        let value = buffer.join('\n').trim();
+        if (value) item[currentKey] = value;
+        currentKey = null;
+        buffer = [];
+      }
+
+      for (const line of lines) {
         const m = line.match(/^\s*([^:]+):\s*(.*)$/);
-        if (m) item[m[1].trim().toUpperCase()] = m[2].trim();
-      });
+        const key = m ? m[1].trim().toUpperCase() : '';
+        if (m && knownKeys.has(key)) {
+          saveCurrent();
+          currentKey = key;
+          buffer = [m[2]];
+        } else if (currentKey) {
+          buffer.push(line);
+        }
+      }
+      saveCurrent();
       return item;
     }).filter(x => x.ISEM);
   }
+
   function phoneHref(phone) { return String(phone || '').replace(/[^+\d]/g, ''); }
   function detail(label, value, isPhone) {
     if (!value) return '';
@@ -27,10 +51,13 @@
     }
     return `<div class="church-photo"><img src="${esc(x.RITRATT)}" alt="${esc(x.ISEM)}" loading="lazy"></div>`;
   }
+  function descriptionHtml(value) {
+    if (!value) return '';
+    return value.split(/\n\s*\n/).map(p => p.trim()).filter(Boolean)
+      .map(p => `<p>${esc(p).replace(/\n/g, '<br>')}</p>`).join('');
+  }
   function card(x, i) {
-    let desc = '';
-    for (let n = 1; n <= 6; n++) if (x['DESKRIZZJONI' + n]) desc += `<p>${esc(x['DESKRIZZJONI' + n])}</p>`;
-    if (!desc && x.DESKRIZZJONI) desc = `<p>${esc(x.DESKRIZZJONI)}</p>`;
+    const desc = descriptionHtml(x.DESKRIZZJONI);
     const details = [
       detail('F’din il-kappella jistgħu jsiru', x.JISTGHU_JSIRU),
       detail('Faċilitajiet', x.FACILITAJIET),
