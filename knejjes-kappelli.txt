@@ -12,7 +12,7 @@ Il-knisja kellha rwol importanti ħafna fl-iżvilupp tal-parroċċa. Fl-1835 l-I
 ---
 TIP: KNISJA
 ISEM: Knisja tas-Sorijiet Franġiskani
-RITRATT: https://parrocci.knisja.mt/wp-content/uploads/2020/11/msida-frangiskani-445x600.jpg
+RITRATT: knisja-frangiskani.png
 DESKRIZZJONI:
 Fl-1961 is-Sorijiet Franġiskani tal-Qalb ta’ Ġesù fetħu skola fl-Imsida, u l-kappella tal-iskola nfetħet ukoll għan-nies tal-lokalità.
 FACILITAJIET: Arja Kundizzjonata · Kids’ Room
