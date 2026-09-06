@@ -19,7 +19,7 @@ FACILITAJIET: Arja Kundizzjonata · Kids’ Room
 ---
 TIP: KAPPELLA
 ISEM: Kappella tal-Università
-RITRATT: kappella-universita.png
+RITRATT: kappella-universita-1.png
 DESKRIZZJONI:
 L-ewwel ġebla tal-Kappella tal-Università tqiegħdet fl-1977. Il-kappella nbniet mill-Knisja f’Malta bħala Ċentru Pastorali għall-ħidma mal-istudenti.
 JISTGHU_JSIRU: Żwiġijiet
