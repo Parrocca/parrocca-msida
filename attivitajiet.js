@@ -25,7 +25,7 @@
   }
 
   function pdfCard(x){
-    return `<article class="activity-card activity-pdf-card"><div class="activity-date">${esc(dateLabel(x.d))}</div><h2>${esc(x.titlu||'Attività tal-Parroċċa')}</h2>${x.desc?`<p>${esc(x.desc)}</p>`:''}</article>`;
+    return `<article class="activity-card activity-pdf-card"><div class="activity-date">${esc(dateLabel(x.d))}</div><h2>Poster tal-Attività</h2><div class="activity-pdf-pages" data-pdf="${esc(x.name)}"><div class="activity-pdf-loading">Qed jitgħabba l-poster…</div></div></article>`;
   }
 
   let pdfJsPromise;
@@ -85,25 +85,32 @@
     return t;
   }
 
-  async function readPdfDetails(file){
-    const url='./'+encodeURIComponent(file.name);
-    try{
-      const lib=await getPdfJs();
-      const pdf=await lib.getDocument(url).promise;
-      const lines=[];
-      for(let n=1;n<=Math.min(pdf.numPages,2);n++){
-        const page=await pdf.getPage(n);
-        const content=await page.getTextContent();
-        lines.push(...textItemsToLines(content.items));
+  async function renderPdfPosters(){
+    const boxes=[...document.querySelectorAll('.activity-pdf-pages[data-pdf]')];
+    if(!boxes.length) return;
+    let lib;
+    try{ lib=await getPdfJs(); }
+    catch(e){ boxes.forEach(box=>box.innerHTML='<div class="activity-pdf-error">Ma rnexxiex nitgħabba l-poster.</div>'); return; }
+
+    for(const box of boxes){
+      const name=box.dataset.pdf;
+      try{
+        const pdf=await lib.getDocument('./'+encodeURIComponent(name)).promise;
+        box.innerHTML='';
+        for(let n=1;n<=pdf.numPages;n++){
+          const page=await pdf.getPage(n);
+          const viewport=page.getViewport({scale:1.6});
+          const canvas=document.createElement('canvas');
+          canvas.className='activity-pdf-canvas';
+          canvas.width=Math.ceil(viewport.width);
+          canvas.height=Math.ceil(viewport.height);
+          box.appendChild(canvas);
+          await page.render({canvasContext:canvas.getContext('2d'),viewport}).promise;
+        }
+      }catch(e){
+        console.warn('Ma rnexxiex nuri l-poster:',name,e);
+        box.innerHTML='<div class="activity-pdf-error">Ma rnexxiex nitgħabba l-poster.</div>';
       }
-      const useful=lines.map(x=>x.trim()).filter(Boolean);
-      const first=useful[0]||'';
-      const title=cleanPdfTitle(first)||'Attività tal-Parroċċa';
-      const desc=useful.slice(1,4).join(' ').replace(/\s+/g,' ').trim();
-      return {...file,titlu:title,desc};
-    }catch(e){
-      console.warn('Ma rnexxiex naqra t-test tal-PDF:',file.name,e);
-      return {...file,titlu:'Attività tal-Parroċċa',desc:'Agħfas il-buttuna biex tiftaħ id-dettalji tal-attività.'};
     }
   }
 
@@ -115,7 +122,7 @@
       ]);
       const textItems=txtRes.ok?parseText(await txtRes.text()):[];
       const rawFiles=apiRes.ok?(await apiRes.json()).filter(x=>x.type==='file'&&PDF_FILE.test(x.name)).map(x=>({kind:'pdf',name:x.name,d:pdfDate(x.name)})):[];
-      const files=await Promise.all(rawFiles.map(readPdfDetails));
+      const files=rawFiles;
 
       const today=new Date();
       today.setHours(0,0,0,0);
@@ -130,9 +137,10 @@
       }
 
       archiveEl.innerHTML=past.length?past.map(x=>x.kind==='pdf'
-        ?`<details class="activity-archive-item"><summary>${esc(dateLabel(x.d))} — ${esc(x.titlu||'Attività tal-Parroċċa')}</summary><div>${x.desc?`<p>${esc(x.desc)}</p>`:''}</div></details>`
+        ?`<details class="activity-archive-item"><summary>${esc(dateLabel(x.d))} — Poster tal-Attività</summary><div class="activity-pdf-pages" data-pdf="${esc(x.name)}"><div class="activity-pdf-loading">Qed jitgħabba l-poster…</div></div></details>`
         :`<details class="activity-archive-item"><summary>${esc(x.data)} — ${esc(x.titlu)}</summary><div>${x.hin?`<p><strong>Ħin:</strong> ${esc(x.hin)}</p>`:''}${x.desc?`<p>${esc(x.desc)}</p>`:''}</div></details>`).join('')
         :"<p>Għad m'hemmx attivitajiet fl-arkivju.</p>";
+      await renderPdfPosters();
     }catch(e){
       console.error(e);
       listEl.innerHTML='<article class="activity-card"><h2>Ma rnexxilniex nuru l-attivitajiet.</h2><p>Erġa’ pprova ftit ieħor.</p></article>';
