@@ -26,7 +26,50 @@
 
   function pdfEmbed(name){
     const url='./'+encodeURIComponent(name);
-    return `<div class="activity-pdf-embed"><object data="${esc(url)}#view=FitH" type="application/pdf"><iframe src="${esc(url)}#view=FitH" title="Poster tal-Attività" loading="lazy"></iframe><p>Il-browser ma setax juri l-PDF direttament.</p></object></div>`;
+    return `<div class="activity-pdf-pages" data-pdf-src="${esc(url)}"><div class="activity-pdf-loading">Qed jitgħabba l-poster…</div></div>`;
+  }
+
+  let pdfJsPromise;
+  function getPdfJs(){
+    if(!pdfJsPromise){
+      pdfJsPromise=import('https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.min.mjs').then(pdfjsLib=>{
+        pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.mjs';
+        return pdfjsLib;
+      });
+    }
+    return pdfJsPromise;
+  }
+
+  async function renderPdfPosters(){
+    const holders=[...document.querySelectorAll('.activity-pdf-pages[data-pdf-src]')];
+    if(!holders.length)return;
+    try{
+      const pdfjsLib=await getPdfJs();
+      for(const holder of holders){
+        try{
+          const pdf=await pdfjsLib.getDocument(holder.dataset.pdfSrc).promise;
+          holder.innerHTML='';
+          for(let pageNo=1;pageNo<=pdf.numPages;pageNo++){
+            const page=await pdf.getPage(pageNo);
+            const viewport=page.getViewport({scale:1.7});
+            const canvas=document.createElement('canvas');
+            const context=canvas.getContext('2d',{alpha:false});
+            canvas.width=Math.floor(viewport.width);
+            canvas.height=Math.floor(viewport.height);
+            canvas.className='activity-pdf-canvas';
+            canvas.setAttribute('aria-label',`Paġna ${pageNo} tal-poster`);
+            holder.appendChild(canvas);
+            await page.render({canvasContext:context,viewport}).promise;
+          }
+        }catch(err){
+          console.error('Poster PDF error:',err);
+          holder.innerHTML='<p class="activity-pdf-error">Ma rnexxiex jintwera l-poster.</p>';
+        }
+      }
+    }catch(err){
+      console.error('PDF.js error:',err);
+      holders.forEach(h=>h.innerHTML='<p class="activity-pdf-error">Ma rnexxiex jintwera l-poster.</p>');
+    }
   }
 
   function pdfCard(x){
@@ -62,6 +105,7 @@
         ?`<details class="activity-archive-item"><summary>${esc(dateLabel(x.d))} — Poster tal-Attività</summary>${pdfEmbed(x.name)}</details>`
         :`<details class="activity-archive-item"><summary>${esc(x.data)} — ${esc(x.titlu)}</summary><div>${x.hin?`<p><strong>Ħin:</strong> ${esc(x.hin)}</p>`:''}${x.desc?`<p>${esc(x.desc)}</p>`:''}</div></details>`).join('')
         :"<p>Għad m'hemmx attivitajiet fl-arkivju.</p>";
+      await renderPdfPosters();
     }catch(e){
       console.error(e);
       listEl.innerHTML='<article class="activity-card"><h2>Ma rnexxilniex nuru l-attivitajiet.</h2><p>Erġa’ pprova ftit ieħor.</p></article>';
