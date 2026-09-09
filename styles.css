@@ -956,3 +956,10 @@ footer a{color:var(--gold-soft);text-decoration:none;font-weight:800}
 @media(max-width:560px){
   .iltaqghu-body .photo-card img{height:auto;max-height:520px;}
 }
+
+
+/* Attivitajiet: poster aktar kompatt u test flimkien mal-poster */
+.activity-pdf-pages{width:min(100%,620px);margin:20px auto 12px}
+.activity-pdf-canvas{width:100%;max-width:620px}
+.activity-poster-desc{margin:.35rem 0 .8rem!important;line-height:1.65}
+@media(max-width:620px){.activity-pdf-pages{width:100%;margin-top:16px}.activity-pdf-canvas{max-width:100%}}

@@ -73,7 +73,12 @@
   }
 
   function pdfCard(x){
-    return `<article class="activity-card activity-pdf-card"><div class="activity-date">${esc(dateLabel(x.d))}</div><h2>Poster tal-Attività</h2>${pdfEmbed(x.name)}</article>`;
+    const t=x.text;
+    const data=t&&t.data?t.data:dateLabel(x.d);
+    const hin=t&&t.hin?' · '+esc(t.hin):'';
+    const titlu=t&&t.titlu?t.titlu:'Poster tal-Attività';
+    const desc=t&&t.desc?`<p class="activity-poster-desc">${esc(t.desc)}</p>`:'';
+    return `<article class="activity-card activity-pdf-card"><div class="activity-date">${esc(data)}${hin}</div><h2>${esc(titlu)}</h2>${desc}${pdfEmbed(x.name)}</article>`;
   }
 
   async function load(){
@@ -84,10 +89,12 @@
       ]);
       const textItems=txtRes.ok?parseText(await txtRes.text()):[];
       const rawFiles=apiRes.ok?(await apiRes.json()).filter(x=>x.type==='file'&&PDF_FILE.test(x.name)).map(x=>({kind:'pdf',name:x.name,d:pdfDate(x.name)})):[];
-      const files=rawFiles;
-      // Jekk hemm poster PDF għall-istess data, uri l-poster biss u evita karta doppja mit-TXT.
-      const pdfDates=new Set(files.filter(x=>x.d).map(x=>`${x.d.getFullYear()}-${x.d.getMonth()}-${x.d.getDate()}`));
-      const textOnly=textItems.filter(x=>!x.d || !pdfDates.has(`${x.d.getFullYear()}-${x.d.getMonth()}-${x.d.getDate()}`));
+      // Jekk PDF u TXT għandhom l-istess data, għaqqadhom: it-test jidher mal-poster.
+      const dateKey=d=>d?`${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`:'';
+      const textByDate=new Map(textItems.filter(x=>x.d).map(x=>[dateKey(x.d),x]));
+      const files=rawFiles.map(x=>({...x,text:textByDate.get(dateKey(x.d))||null}));
+      const pdfDates=new Set(files.filter(x=>x.d).map(x=>dateKey(x.d)));
+      const textOnly=textItems.filter(x=>!x.d || !pdfDates.has(dateKey(x.d)));
 
       const today=new Date();
       today.setHours(0,0,0,0);
