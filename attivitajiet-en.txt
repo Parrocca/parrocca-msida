@@ -1,0 +1,10 @@
+DATA: 20 September 2026
+ĦIN: 18.00
+TITLU: Feast of St Francis
+DESKRIZZJONI: Solemn Mass followed by a procession.
+---
+DATA: 4 October 2026
+ĦIN: 18.00
+TITLU: Feast of Our Lady of the Rosary
+DESKRIZZJONI: Sung Mass followed by a procession.
+---

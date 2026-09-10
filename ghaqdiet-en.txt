@@ -1,0 +1,14 @@
+TIP: GROUP
+ISEM: Christian Families Groups
+DESKRIZZJONI: A group within the parish community dedicated to Christian families.
+KUNTATT: 7970 3049
+---
+TIP: PASTORAL
+ISEM: Parish Pastoral Council
+---
+TIP: PASTORAL
+ISEM: Parish Economic Council
+---
+TIP: PASTORAL
+ISEM: Diaconia Commission
+---

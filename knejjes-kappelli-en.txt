@@ -1,0 +1,39 @@
+TIP: CHURCH
+ISEM: Church of the Immaculate Conception
+RITRATT: knisja-kunċizzjoni-1.png
+DESKRIZZJONI:
+The Church of the Immaculate Conception in Msida is a small church of great importance in the history of the locality.
+
+The church is very old and part of it is troglodytic, meaning that it is situated in a cave. According to the historical account of the Archdiocese of Malta, at the time of the Apostolic Visitor Mgr Pietro Dusina in 1575 it was dedicated to Our Lady of Help. Academic sources also confirm that the church is mentioned in Dusina’s 1575 visitation.
+
+In 1640 the part of the church outside the cave was rebuilt, and in 1670 a sacristy was added. There is also historical evidence of a very old Marian devotion at this site, and the church was regarded as one of Malta’s Marian shrines.
+
+The church played a very important role in the development of the parish. In 1835 Msida became a vice-parish, and when Msida became a parish in 1867, the Church of the Immaculate Conception served as Msida’s first parish church. It continued in this role until 1889, when the new church dedicated to the Patronage of St Joseph, today the Parish Church of Msida, was opened for worship.
+---
+TIP: CHURCH
+ISEM: Church of the Franciscan Sisters
+RITRATT: knisja-frangiskani.png
+DESKRIZZJONI:
+In 1961 the Franciscan Sisters of the Heart of Jesus opened a school in Msida, and the school chapel was also opened to the local community.
+FACILITAJIET: Air conditioning · Kids’ Room
+---
+TIP: CHAPEL
+ISEM: University Chapel
+RITRATT: kappella-universita-1.png
+DESKRIZZJONI:
+The foundation stone of the University Chapel was laid in 1977. The chapel was built by the Church in Malta as a Pastoral Centre for ministry among students.
+JISTGHU_JSIRU: Weddings
+FACILITAJIET: Air conditioning
+RETTUR: Fr Patrick Magro S.J.
+KUNTATT: 2340 2341
+---
+TIP: CHAPEL
+ISEM: Centre Chapel
+RITRATT: centru-ġdid.png
+DESKRIZZJONI:
+The Adoration Chapel is located on the right-hand side of the Holy Family Centre, in Johnny Catania Street, Msida.
+The Centre Chapel offers a space for prayer and adoration throughout the week.
+ADORAZZJONI: Monday to Friday: 09:00 – 21:00
+RETTUR: The Archpriest
+KUNTATT: 2133 4949
+---
