@@ -2,7 +2,7 @@
   const latestEl = document.getElementById('latest-notice');
   const archiveEl = document.getElementById('notice-archive');
   const GITHUB_API = 'https://api.github.com/repos/Parrocca/parrocca-msida/contents';
-  const NOTICE_FILE = /^avviz-(\d{4})-(\d{2})-(\d{2})\.(txt|jpe?g|png|webp|pdf)$/i;
+  const NOTICE_FILE = /^notice-(\d{4})-(\d{2})-(\d{2})\.(txt|jpe?g|png|webp|pdf)$/i;
 
   function escapeHtml(value) {
     return String(value || '').replace(/[&<>'"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));
@@ -12,12 +12,12 @@
     const m = name.match(NOTICE_FILE);
     if (!m) return '';
     const d = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
-    return new Intl.DateTimeFormat('mt-MT', { day:'numeric', month:'long', year:'numeric' }).format(d);
+    return new Intl.DateTimeFormat('en-GB', { day:'numeric', month:'long', year:'numeric' }).format(d);
   }
 
   function parseText(text, fallbackDate) {
     const lines = text.trim().split(/\r?\n/);
-    const n = { data: fallbackDate, titlu: 'Notices Parrokkjali', sottotitlu: '', body: [] };
+    const n = { data: fallbackDate, titlu: 'Parish Notices', sottotitlu: '', body: [] };
     let bodyStarted = false;
     for (const raw of lines) {
       const line = raw.trim();
@@ -49,11 +49,11 @@
     const date = dateFromName(item.name);
     return `<article class="notice ${featured ? 'featured latest-dynamic' : 'archive-card'}">
       ${date ? `<span class="pill">${escapeHtml(date)}</span>` : ''}
-      <h3>Notice Parrokkjali</h3>
+      <h3>Parish Notice</h3>
       <a href="${item.download_url}" target="_blank" rel="noopener">
-        <img class="auto-notice-image" src="${item.download_url}" alt="Notice Parrokkjali ${escapeHtml(date)}" loading="lazy">
+        <img class="auto-notice-image" src="${item.download_url}" alt="Parish Notice ${escapeHtml(date)}" loading="lazy">
       </a>
-      <p><a class="notice-image-link${featured ? '' : ' dark-link'}" href="${item.download_url}" target="_blank" rel="noopener">View notice ikbar →</a></p>
+      <p><a class="notice-image-link${featured ? '' : ' dark-link'}" href="${item.download_url}" target="_blank" rel="noopener">View larger notice →</a></p>
     </article>`;
   }
 
@@ -64,19 +64,19 @@
     if (!featured) {
       return `<article class="notice archive-card">
         ${date ? `<span class="pill">${escapeHtml(date)}</span>` : ''}
-        <h3>Notices Parrokkjali</h3>
-        <p><a class="btn btn-primary" href="${pdfUrl}" target="_blank" rel="noopener">Iftaħ l-Notices (PDF)</a></p>
+        <h3>Parish Notices</h3>
+        <p><a class="btn btn-primary" href="${pdfUrl}" target="_blank" rel="noopener">Open Notices (PDF)</a></p>
       </article>`;
     }
 
     return `<article class="notice featured latest-dynamic pdf-featured">
       ${date ? `<span class="pill">${escapeHtml(date)}</span>` : ''}
-      <h3>Notices Parrokkjali</h3>
-      <p>L-avviżi ta’ din il-ġimgħa jidhru hawn taħt.</p>
+      <h3>Parish Notices</h3>
+      <p>This week’s notices are shown below.</p>
       <div class="pdf-pages" data-pdf-src="${pdfUrl}">
-        <div class="pdf-loading">Qed jinfetħu l-avviżi…</div>
+        <div class="pdf-loading">Loading the notices…</div>
       </div>
-      <p class="pdf-open-row"><a class="notice-image-link" href="${pdfUrl}" target="_blank" rel="noopener">Open PDF f’paġna ġdida →</a></p>
+      <p class="pdf-open-row"><a class="notice-image-link" href="${pdfUrl}" target="_blank" rel="noopener">Open PDF in a new page →</a></p>
     </article>`;
   }
 
@@ -108,20 +108,20 @@
         canvas.width = Math.floor(viewport.width);
         canvas.height = Math.floor(viewport.height);
         canvas.className = 'pdf-page-canvas';
-        canvas.setAttribute('aria-label', `Page ${pageNo} tal-avviżi`);
+        canvas.setAttribute('aria-label', `Notices page ${pageNo}`);
         holder.appendChild(canvas);
         await page.render({ canvasContext: context, viewport }).promise;
       }
     } catch (err) {
       console.error('PDF preview error:', err);
-      holder.innerHTML = '<p class="pdf-preview-error">Ma stajniex nuru l-PDF direttament. Uża l-link hawn taħt biex tiftaħu.</p>';
+      holder.innerHTML = '<p class="pdf-preview-error">We could not display the PDF directly. Use the link below to open it.</p>';
     }
   }
 
   async function loadItem(item) {
     if (/\.txt$/i.test(item.name)) {
       const r = await fetch(item.download_url + '?ts=' + Date.now(), { cache:'no-store' });
-      if (!r.ok) throw new Error('Ma setax jinqara ' + item.name);
+      if (!r.ok) throw new Error('Could not read ' + item.name);
       return { item, notice: parseText(await r.text(), dateFromName(item.name)), image:false };
     }
     if (/\.pdf$/i.test(item.name)) return { item, pdf:true, image:false };
@@ -138,11 +138,11 @@
       const r = await fetch(GITHUB_API + '?ts=' + Date.now(), {
         headers:{'Accept':'application/vnd.github+json'}, cache:'no-store'
       });
-      if (!r.ok) throw new Error('Ma setgħux jinqraw l-avviżi.');
+      if (!r.ok) throw new Error('Could not load the notices.');
       const files = (await r.json())
         .filter(x => x.type === 'file' && NOTICE_FILE.test(x.name))
         .sort((a,b) => b.name.localeCompare(a.name));
-      if (!files.length) throw new Error('M’hemmx avviżi.');
+      if (!files.length) throw new Error('There are no notices.');
 
       const data = await Promise.all(files.map(loadItem));
       latestEl.className = '';
@@ -155,7 +155,7 @@
       }
       archiveEl.innerHTML = data.slice(1).map(d => {
         const label = (d.image || d.pdf) ? dateFromName(d.item.name) : (d.notice.data || 'Notice preċedenti');
-        const title = d.pdf ? 'Notices Parrokkjali (PDF)' : (d.image ? 'Notice Parrokkjali' : d.notice.titlu);
+        const title = d.pdf ? 'Parish Notices (PDF)' : (d.image ? 'Parish Notice' : d.notice.titlu);
         return `<details class="archive-item"><summary><span>${escapeHtml(label)}</span><strong>${escapeHtml(title)}</strong></summary><div class="archive-content">${render(d,false)}</div></details>`;
       }).join('');
     } catch (err) {
