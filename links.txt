@@ -34,3 +34,4 @@ ISEM_EN: Msida Local Counsil
 DESKRIZZJONI_MT: Tagħrif u servizzi offruti mill-Kunsill Lokali.
 DESKRIZZJONI_EN: Information and services offered by Local Counsil.
 URL: https://msidalc.gov.mt/
+---
