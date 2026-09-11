@@ -15,15 +15,16 @@
     .replace(/'/g, '&#039;');
 
   function parseLinks(text) {
-    return text
-      .split(/^---\s*$/m)
+    const normalized = String(text || '').replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n');
+    return normalized
+      .split(/^\s*---\s*$/m)
       .map(block => block.trim())
       .filter(Boolean)
       .map(block => {
         const item = {};
-        block.split(/\r?\n/).forEach(line => {
-          const match = line.match(/^([A-Z_]+):\s*(.*)$/);
-          if (match) item[match[1]] = match[2].trim();
+        block.split('\n').forEach(line => {
+          const match = line.match(/^\s*([A-Z_]+)\s*:\s*(.*?)\s*$/);
+          if (match) item[match[1]] = match[2];
         });
         return item;
       })
@@ -38,7 +39,9 @@
 
     grid.innerHTML = items.map(item => {
       const name = lang === 'en' ? (item.ISEM_EN || item.ISEM_MT) : (item.ISEM_MT || item.ISEM_EN);
-      const description = lang === 'en' ? (item.DESKRIZZJONI_EN || item.DESKRIZZJONI_MT || '') : (item.DESKRIZZJONI_MT || item.DESKRIZZJONI_EN || '');
+      const description = lang === 'en'
+        ? (item.DESKRIZZJONI_EN || item.DESKRIZZJONI_MT || '')
+        : (item.DESKRIZZJONI_MT || item.DESKRIZZJONI_EN || '');
       const url = item.URL;
       return `
         <article class="useful-link-card">
@@ -52,14 +55,28 @@
     }).join('');
   }
 
+  async function loadLinks() {
+    const stamp = Date.now();
+    const sources = [
+      `https://raw.githubusercontent.com/Parrocca/parrocca-msida/main/links.txt?ts=${stamp}`,
+      `links.txt?ts=${stamp}`
+    ];
+
+    for (const src of sources) {
+      try {
+        const response = await fetch(src, { cache: 'no-store' });
+        if (!response.ok) continue;
+        const text = await response.text();
+        const items = parseLinks(text);
+        if (items.length) {
+          render(items);
+          return;
+        }
+      } catch (e) {}
+    }
+    grid.innerHTML = `<p class="links-note">${labels.error}</p>`;
+  }
+
   grid.innerHTML = `<p class="links-note">${labels.loading}</p>`;
-  fetch('links.txt?v=' + Date.now(), { cache: 'no-store' })
-    .then(response => {
-      if (!response.ok) throw new Error('HTTP ' + response.status);
-      return response.text();
-    })
-    .then(text => render(parseLinks(text)))
-    .catch(() => {
-      grid.innerHTML = `<p class="links-note">${labels.error}</p>`;
-    });
+  loadLinks();
 })();
