@@ -29,3 +29,8 @@ DESKRIZZJONI_MT: Is-sit uffiċjali tas-Santa Sede, b’dokumenti, aħbarijiet u 
 DESKRIZZJONI_EN: The official website of the Holy See, with documents, news and information from the Pope and the Universal Church.
 URL: https://www.vatican.va/
 ---
+ISEM_MT: Kunsill Lokali tal-Imsida
+ISEM_EN: Msida Local Counsil
+DESKRIZZJONI_MT: Tagħrif u servizzi offruti mill-Kunsill Lokali.
+DESKRIZZJONI_EN: Information and services offered by Local Counsil.
+URL: https://msidalc.gov.mt/
