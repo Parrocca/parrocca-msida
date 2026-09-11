@@ -53,7 +53,7 @@
   }
 
   grid.innerHTML = `<p class="links-note">${labels.loading}</p>`;
-  fetch('links.txt?v=20260911-1', { cache: 'no-store' })
+  fetch('links.txt?v=' + Date.now(), { cache: 'no-store' })
     .then(response => {
       if (!response.ok) throw new Error('HTTP ' + response.status);
       return response.text();
