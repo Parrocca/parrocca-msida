@@ -1,0 +1,31 @@
+---
+ISEM_MT: Laikos
+ISEM_EN: Laikos
+DESKRIZZJONI_MT: Artikli, tagħrif u riżorsi dwar il-fidi u l-ħajja Nisranija.
+DESKRIZZJONI_EN: Articles, information and resources about faith and Christian life.
+URL: https://laikosblog.org/
+---
+ISEM_MT: Knisja f’Malta
+ISEM_EN: Church in Malta
+DESKRIZZJONI_MT: Aħbarijiet, tagħrif, quddies u riżorsi mill-Knisja Kattolika f’Malta.
+DESKRIZZJONI_EN: News, information, Masses and resources from the Catholic Church in Malta.
+URL: https://church.mt/
+---
+ISEM_MT: Arċidjoċesi ta’ Malta
+ISEM_EN: Archdiocese of Malta
+DESKRIZZJONI_MT: Tagħrif dwar l-Arċidjoċesi ta’ Malta, l-Isqfijiet u l-ħidma djoċesana.
+DESKRIZZJONI_EN: Information about the Archdiocese of Malta, the Bishops and diocesan pastoral work.
+URL: https://church.mt/archdiocese/
+---
+ISEM_MT: Moviment ta’ Kana
+ISEM_EN: Cana Movement
+DESKRIZZJONI_MT: Is-sit tal-Moviment ta’ Kana.
+DESKRIZZJONI_EN: The website of the Cana Movement.
+URL: https://movimenttakana.mt/
+---
+ISEM_MT: Vatikan
+ISEM_EN: Vatican
+DESKRIZZJONI_MT: Is-sit uffiċjali tas-Santa Sede, b’dokumenti, aħbarijiet u tagħrif mill-Papa u l-Knisja Universali.
+DESKRIZZJONI_EN: The official website of the Holy See, with documents, news and information from the Pope and the Universal Church.
+URL: https://www.vatican.va/
+---
