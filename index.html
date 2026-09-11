@@ -21,7 +21,7 @@
 
       <button class="menu-toggle" aria-label="Iftaħ il-menu" onclick="document.body.classList.toggle('menu-open')">☰</button>
 
-      <nav class="nav">
+      <nav class="nav" onclick="if(event.target.closest('a')) document.body.classList.remove('menu-open')">
         <a href="#ewlenija">Ewlenija</a>
         <a href="#avvizi">Avviżi</a>
         <a href="#quddies">Quddies</a>
