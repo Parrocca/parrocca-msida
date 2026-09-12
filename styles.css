@@ -979,3 +979,27 @@ footer a{color:var(--gold-soft);text-decoration:none;font-weight:800}
 .links-body .site-header nav a{color:var(--navy);text-decoration:none;font-weight:700}
 .links-body .site-header nav a:hover{color:var(--gold)}
 .links-body .lang-switch{margin:0;justify-content:center}
+
+/* Background sfumat tal-knisja fuq il-paġni interni */
+.gallery-body,
+.activities-body,
+.churches-body,
+.pastoral-body,
+.links-body{
+  background:
+    linear-gradient(rgba(255,253,249,.84), rgba(255,253,249,.84)),
+    url('knisja-msida-home.webp') center top / cover fixed no-repeat;
+}
+
+/* Fuq mobile nevitaw background fixed biex il-paġna tiskrollja aħjar */
+@media(max-width:760px){
+  .gallery-body,
+  .activities-body,
+  .churches-body,
+  .pastoral-body,
+  .links-body{
+    background:
+      linear-gradient(rgba(255,253,249,.86), rgba(255,253,249,.86)),
+      url('knisja-msida-home.webp') center top / cover no-repeat;
+  }
+}
