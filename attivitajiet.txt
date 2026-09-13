@@ -8,3 +8,8 @@ DATA: 4 ta' Ottubru 2026
 TITLU: Festa tal-Madonna tar-Rużarju
 DESKRIZZJONI: Quddiesa kantata u wara purċissjoni.
 ---
+DATA: 2 ta' Ottubru 2026
+ĦIN: 18.30
+TITLU: 800 sena mill-mewt ta' San Franġisk ta' Assisi  1226  -  2026
+DESKRIZZJONI: Quddiesa kantata bis-sehem tal-Kor Parrokkjali.
+---
