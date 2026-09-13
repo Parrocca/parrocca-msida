@@ -4,12 +4,12 @@
   const GITHUB_API = 'https://api.github.com/repos/Parrocca/parrocca-msida/contents';
   const PDF_FILE = /^attivita-(\d{4})-(\d{2})-(\d{2})\.pdf$/i;
 
-  const months = {"jannar":0,"frar":1,"marzu":2,"april":3,"mejju":4,"ġunju":5,"gunju":5,"lulju":6,"awwissu":7,"settembru":8,"ottubru":9,"novembru":10,"diċembru":11,"dicembru":11};
+  const months = {"january":0,"february":1,"march":2,"april":3,"may":4,"june":5,"july":6,"august":7,"september":8,"october":9,"november":10,"december":11};
 
   function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-  function getTextDate(s){const m=String(s||'').toLowerCase().match(/(\d{1,2})\s+(?:ta'|t')?\s*([a-zà-ż]+)\s+(\d{4})/i);return m&&months[m[2]]!==undefined?new Date(+m[3],months[m[2]],+m[1]):null;}
+  function getTextDate(s){const m=String(s||'').toLowerCase().match(/(\d{1,2})\s+([a-z]+)\s+(\d{4})/i);return m&&months[m[2]]!==undefined?new Date(+m[3],months[m[2]],+m[1]):null;}
   function pdfDate(name){const m=name.match(PDF_FILE);return m?new Date(+m[1],+m[2]-1,+m[3]):null;}
-  function dateLabel(d){const m=['JANNAR','FRAR','MARZU','APRIL','MEJJU','ĠUNJU','LULJU','AWWISSU','SETTEMBRU','OTTUBRU','NOVEMBRU','DIĊEMBRU'];return `${d.getDate()} TA' ${m[d.getMonth()]} ${d.getFullYear()}`;}
+  function dateLabel(d){const m=['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'];return `${d.getDate()} ${m[d.getMonth()]} ${d.getFullYear()}`;}
 
   function parseText(text){
     return text.split(/\n---\s*\n?/).map(b=>b.trim()).filter(Boolean).map(b=>{
@@ -26,7 +26,7 @@
 
   function pdfEmbed(name){
     const url='./'+encodeURIComponent(name);
-    return `<div class="activity-pdf-pages" data-pdf-src="${esc(url)}"><div class="activity-pdf-loading">Qed jitgħabba l-poster…</div></div>`;
+    return `<div class="activity-pdf-pages" data-pdf-src="${esc(url)}"><div class="activity-pdf-loading">Loading poster…</div></div>`;
   }
 
   let pdfJsPromise;
