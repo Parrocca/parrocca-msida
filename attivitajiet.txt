@@ -13,7 +13,7 @@ DATA: 2 ta' Ottubru 2026
 TITLU: 800 sena mill-mewt ta' San Franġisk ta' Assisi  1226  -  2026
 DESKRIZZJONI: Quddiesa kantata bis-sehem tal-Kor Parrokkjali.
 ---
-DATA: 26 ta' Settubru 2026
+DATA: 26 ta' Settembru 2026
 ĦIN: 19.30
 TITLU: il-Grupp Armar se jorganizza ikla għal kulħadd fiċ-Ċentru 
 DESKRIZZJONI: Min jixtieq jibbukkja jista’ jagħmel dan mis-sagristija jew mingħand membri tal-Grupp Armar.
