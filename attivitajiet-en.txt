@@ -8,3 +8,8 @@ DATA: 4 October 2026
 TITLU: Feast of Our Lady of the Rosary
 DESKRIZZJONI: Sung Mass followed by a procession.
 ---
+DATA: 2 October 2026
+ĦIN: 18.30
+TITLU: 800th Anniversary of the Death of St Francis of Assisi 1226 – 2026
+DESKRIZZJONI: Solemn Mass with the participation of the Parish Choir.
+---
