@@ -15,6 +15,6 @@ DESKRIZZJONI: Quddiesa kantata bis-sehem tal-Kor Parrokkjali.
 ---
 DATA: 26 ta' Settembru 2026
 ĦIN: 19.30
-TITLU: il-Grupp Armar se jorganizza ikla għal kulħadd fiċ-Ċentru 
+TITLU: Il-Grupp Armar se jorganizza ikla għal kulħadd fiċ-Ċentru 
 DESKRIZZJONI: Min jixtieq jibbukkja jista’ jagħmel dan mis-sagristija jew mingħand membri tal-Grupp Armar.
 ---
