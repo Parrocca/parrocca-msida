@@ -4,7 +4,7 @@
   const GITHUB_API = 'https://api.github.com/repos/Parrocca/parrocca-msida/contents';
   const PDF_FILE = /^attivita-(\d{4})-(\d{2})-(\d{2})\.pdf$/i;
 
-  const months = {"january":0,"february":1,"march":2,"april":3,"may":4,"june":5,"july":6,"august":7,"september":8,"october":9,"november":10,"december":11};
+  const months = {"january":0,"february":1,"march":2,"april":3,"may":4,"june":5,"july":6,"august":7,"september":8,"septber":8,"october":9,"november":10,"december":11};
 
   function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
   function getTextDate(s){const m=String(s||'').toLowerCase().match(/(\d{1,2})\s+([a-z]+)\s+(\d{4})/i);return m&&months[m[2]]!==undefined?new Date(+m[3],months[m[2]],+m[1]):null;}

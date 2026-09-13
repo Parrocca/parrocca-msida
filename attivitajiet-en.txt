@@ -15,6 +15,6 @@ DESKRIZZJONI: Solemn Mass with the participation of the Parish Choir.
 ---
 DATA: 26 September 2026
 ĦIN: 19.30
-TITLU: The Church Decorations Group will be organising a dinner for everyone at the Parish Centre
+TITLU: the Church Decorations Group will be organising a dinner for everyone at the Parish Centre
 DESKRIZZJONI:  Bookings can be made at the sacristy or through members of the Church Decorations Group.
 ---
