@@ -1,7 +1,7 @@
 DATA: 20 September 2026
 ĦIN: 18.00
 TITLU: Feast of St Francis
-DESKRIZZJONI: Solemn Mass followed by a procession.
+DESKRIZZJONI: Solemn Mass presided over by His Excellency Mgr George Bugeja, Apostolic Vicar Emeritus of Tripli followed by a procession.
 ---
 DATA: 4 October 2026
 ĦIN: 18.00
