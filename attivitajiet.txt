@@ -1,7 +1,7 @@
 DATA: 20 ta' Settembru 2026
 ĦIN: 18.00
 TITLU: Festa ta' San Franġisk
-DESKRIZZJONI: Quddiesa Solenni u wara purċisjoni.
+DESKRIZZJONI: Quddiesa Kantata mmexxija mill-Eċċelenza Tiegħu Mons.George Bugeja, Vigarju Appostoliku Emeritu ta' Tripli u wara purċisjoni.
 ---
 DATA: 4 ta' Ottubru 2026
 ĦIN: 18.00
