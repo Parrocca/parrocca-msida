@@ -99,11 +99,29 @@
         fetch(GITHUB_API+'?ts='+Date.now(),{headers:{Accept:'application/vnd.github+json'},cache:'no-store'})
       ]);
       const textItems=txtRes.ok?parseText(await txtRes.text()):[];
-      const rawFiles=apiRes.ok?(await apiRes.json()).filter(x=>x.type==='file'&&PDF_FILE.test(x.name)).map(x=>({kind:'pdf',name:x.name,d:pdfDate(x.name)})):[];
-      // Jekk PDF u TXT għandhom l-istess data, għaqqadhom: it-test jidher mal-poster.
-      const dateKey=d=>d?`${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`:'';
-      const textByDate=new Map(textItems.filter(x=>x.d).map(x=>[dateKey(x.d),x]));
-      const files=rawFiles.map(x=>({...x,text:textByDate.get(dateKey(x.d))||null}));
+      const dateKey=d=>d?`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`:'';
+      const expectedName=d=>d?`attivita-${dateKey(d)}.pdf`:'';
+
+      // L-ewwel nippruvaw il-PDF mistenni direttament mid-data fit-TXT.
+      // Dan ma jiddependix mill-GitHub API u għalhekk poster ġdid jingħaqad
+      // mat-test anke jekk l-API tkun cached jew temporanjament limitata.
+      const directChecks=await Promise.all(textItems.filter(x=>x.d).map(async x=>{
+        const name=expectedName(x.d);
+        try{
+          const r=await fetch('./'+encodeURIComponent(name)+'?ts='+Date.now(),{method:'HEAD',cache:'no-store'});
+          return r.ok?{kind:'pdf',name,d:x.d,text:x}:null;
+        }catch(_){ return null; }
+      }));
+      const directFiles=directChecks.filter(Boolean);
+      const directNames=new Set(directFiles.map(x=>x.name.toLowerCase()));
+
+      // L-API tibqa' tintuża biss biex insibu posters li m'għandhomx entrata fit-TXT.
+      let apiFiles=[];
+      if(apiRes.ok){
+        const apiData=await apiRes.json();
+        if(Array.isArray(apiData)) apiFiles=apiData.filter(x=>x.type==='file'&&PDF_FILE.test(x.name)&&!directNames.has(x.name.toLowerCase())).map(x=>({kind:'pdf',name:x.name,d:pdfDate(x.name),text:null}));
+      }
+      const files=[...directFiles,...apiFiles];
       const pdfDates=new Set(files.filter(x=>x.d).map(x=>dateKey(x.d)));
       const textOnly=textItems.filter(x=>!x.d || !pdfDates.has(dateKey(x.d)));
 
