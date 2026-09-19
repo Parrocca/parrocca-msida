@@ -3,6 +3,20 @@
   const archiveEl = document.getElementById('notice-archive');
   const GITHUB_API = 'https://api.github.com/repos/Parrocca/parrocca-msida/contents';
   const NOTICE_FILE = /^avviz-(\d{4})-(\d{2})-(\d{2})\.(txt|jpe?g|png|webp|pdf)$/i;
+  const FALLBACK_FILES = ['avviz-2026-09-20.pdf','avviz-2026-09-13.pdf','avviz-2026-09-06.pdf','avviz-2026-08-30.txt'];
+
+  function localItem(name) { return { type:'file', name, download_url:'./' + encodeURIComponent(name) }; }
+
+  async function getNoticeFiles() {
+    try {
+      const r = await fetch(GITHUB_API + '?ts=' + Date.now(), { headers:{'Accept':'application/vnd.github+json'}, cache:'no-store' });
+      if (!r.ok) throw new Error('GitHub API unavailable');
+      const files = (await r.json()).filter(x => x.type === 'file' && NOTICE_FILE.test(x.name)).sort((a,b) => b.name.localeCompare(a.name));
+      if (files.length) return files;
+    } catch (e) { console.warn('Qed tintuża l-lista lokali tal-avviżi.', e); }
+    return FALLBACK_FILES.map(localItem).sort((a,b) => b.name.localeCompare(a.name));
+  }
+
 
   function escapeHtml(value) {
     return String(value || '').replace(/[&<>'"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));
@@ -135,13 +149,7 @@
 
   async function loadNotices() {
     try {
-      const r = await fetch(GITHUB_API + '?ts=' + Date.now(), {
-        headers:{'Accept':'application/vnd.github+json'}, cache:'no-store'
-      });
-      if (!r.ok) throw new Error('Ma setgħux jinqraw l-avviżi.');
-      const files = (await r.json())
-        .filter(x => x.type === 'file' && NOTICE_FILE.test(x.name))
-        .sort((a,b) => b.name.localeCompare(a.name));
+      const files = await getNoticeFiles();
       if (!files.length) throw new Error('M’hemmx avviżi.');
 
       const data = await Promise.all(files.map(loadItem));
