@@ -19,7 +19,7 @@
         </div>
       </div>
 
-      <button class="menu-toggle" aria-label="Open menu" onclick="document.body.classList.toggle('menu-open')">☰</button>
+      <button class="menu-toggle" aria-label="Open menu" onclick="document.body.classList.toggle('menu-open')">MENU</button>
 
       <nav class="nav" onclick="if(event.target.closest('a')) document.body.classList.remove('menu-open')">
         <a href="#ewlenija">Home</a>
@@ -96,9 +96,19 @@
             <span class="kicker dark">Previous Notices</span>
             <h3>Notices Archive</h3>
           </div>
-          <p>Previous notices and the Pastoral Plan are available on a separate page.</p>
+          <p>Select a date to open an older notice.</p>
         </div>
-        <p><a class="btn btn-primary" href="notices-archive.html">View Full Archive</a></p>
+        <div id="notice-archive" class="notice-archive"></div>
+
+        <div class="notice-grid parish-notices extra-notices">
+          <article class="notice">
+            <div class="notice-icon">📝</div>
+            <h3>Pastoral Plan 2026–2027</h3>
+            <p>The Parish is preparing its Pastoral Plan for the next two years. Parishioners are invited to contribute by completing a questionnaire.</p>
+            <p><strong>Closing date: 15 September 2026.</strong></p>
+            <a class="notice-image-link dark-link" href="pjan-pastorali-2026-2027.png" target="_blank">View the questionnaire and QR code →</a>
+          </article>
+        </div>
       </div>
     </section>
 

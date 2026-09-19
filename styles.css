@@ -55,7 +55,7 @@ a{color:inherit}
 .nav-dropdown-menu a{display:block;padding:11px 13px;border-radius:8px;white-space:nowrap}
 .nav-dropdown-menu a:hover{background:var(--paper);color:var(--gold)}
 .nav-dropdown:hover .nav-dropdown-menu,.nav-dropdown:focus-within .nav-dropdown-menu{display:block}
-.menu-toggle{display:none;border:0;background:none;font-size:1.6rem;color:var(--navy)}
+.menu-toggle{display:none;border:1px solid var(--gold);background:var(--navy);color:#fff;font-size:.82rem;font-weight:800;letter-spacing:.08em;padding:8px 12px;border-radius:7px;cursor:pointer;line-height:1}
 
 .hero{
   min-height:760px;
