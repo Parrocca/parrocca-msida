@@ -149,6 +149,7 @@
       latestEl.innerHTML = render(data[0], true);
       if (data[0].pdf) await renderFeaturedPdf();
 
+      if (!archiveEl) return;
       if (data.length === 1) {
         archiveEl.innerHTML = '<p class="archive-empty">Bħalissa m’hemmx avviżi eqdem fl-arkivju.</p>';
         return;
