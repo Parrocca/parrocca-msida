@@ -254,7 +254,7 @@ footer a{color:var(--gold-soft);text-decoration:none;font-weight:800}
   .nav-dropdown{display:block}
   .nav-dropbtn{display:none}
   .nav-dropdown-menu{display:block;position:static;transform:none;min-width:0;padding:0;margin:0;border:0;border-radius:0;box-shadow:none}
-  .nav-dropdown-menu a{padding:0;white-space:normal}
+  .nav-dropdown-menu a{padding:10px 0;white-space:normal;line-height:1.35}
   .hero{min-height:680px}
   .quick-panel{grid-template-columns:1fr;position:relative;left:auto;bottom:auto;transform:none;margin-top:-35px}
   .quick-card{border-right:0;border-bottom:1px solid var(--line)}
