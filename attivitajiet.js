@@ -1,6 +1,7 @@
 (function () {
   const listEl = document.getElementById('activities-list');
   const archiveEl = document.getElementById('activities-archive');
+  const archiveMode = document.body.classList.contains('activities-archive-body');
   const GITHUB_API = 'https://api.github.com/repos/Parrocca/parrocca-msida/contents';
   const PDF_FILE = /^attivita-(\d{4})-(\d{2})-(\d{2})\.pdf$/i;
 
@@ -131,16 +132,13 @@
       const future=all.filter(x=>!x.d||x.d>=today).sort((a,b)=>(a.d||new Date(8640000000000000))-(b.d||new Date(8640000000000000)));
       const past=all.filter(x=>x.d&&x.d<today).sort((a,b)=>b.d-a.d);
 
-      if(!future.length){
-        listEl.innerHTML='<article class="activity-card"><h2>Għad m’hemmx attivitajiet imħabbra.</h2></article>';
+      if(archiveMode){
+        listEl.innerHTML=past.length?past.map(x=>x.kind==='pdf'?pdfCard(x):textCard(x)).join('')
+          :'<article class="activity-card"><h2>Għad m’hemmx attivitajiet fl-arkivju.</h2></article>';
       }else{
-        listEl.innerHTML=future.map(x=>x.kind==='pdf'?pdfCard(x):textCard(x)).join('');
+        listEl.innerHTML=future.length?future.map(x=>x.kind==='pdf'?pdfCard(x):textCard(x)).join('')
+          :'<article class="activity-card"><h2>Għad m’hemmx attivitajiet imħabbra.</h2></article>';
       }
-
-      archiveEl.innerHTML=past.length?past.map(x=>x.kind==='pdf'
-        ?`<details class="activity-archive-item"><summary>${esc(dateLabel(x.d))} — Poster tal-Attività</summary>${pdfEmbed(x.name)}</details>`
-        :`<details class="activity-archive-item"><summary>${esc(x.data)} — ${esc(x.titlu)}</summary><div>${x.hin?`<p><strong>Ħin:</strong> ${esc(x.hin)}</p>`:''}${x.desc?`<p>${esc(x.desc)}</p>`:''}</div></details>`).join('')
-        :"<p>Għad m'hemmx attivitajiet fl-arkivju.</p>";
       await renderPdfPosters();
     }catch(e){
       console.error(e);
