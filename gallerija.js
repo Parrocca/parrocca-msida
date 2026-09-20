@@ -1,12 +1,10 @@
 let photos = [];
 let currentPhoto = 0;
 
-const GITHUB_API = 'https://api.github.com/repos/Parrocca/parrocca-msida/contents';
-const IMAGE_EXTENSIONS = /\.(jpe?g|png|webp|gif)$/i;
-
 function niceCaption(filename) {
   return filename
     .replace(/\.[^.]+$/, '')
+    .replace(/^iltaqghu-/i, '')
     .replace(/[-_]+/g, ' ')
     .replace(/\b\w/g, letter => letter.toUpperCase());
 }
@@ -14,29 +12,24 @@ function niceCaption(filename) {
 async function loadGallery() {
   const grid = document.getElementById('photo-grid');
   try {
-    const response = await fetch(GITHUB_API, {
-      headers: { 'Accept': 'application/vnd.github+json' },
-      cache: 'no-store'
-    });
-    if (!response.ok) throw new Error('Ma setgħux jinqraw ir-ritratti tal-gallerija.');
+    const response = await fetch('gallerija.txt?v=20260920-2', { cache: 'no-store' });
+    if (!response.ok) throw new Error('List unavailable');
+    const text = await response.text();
 
-    const files = await response.json();
-    photos = files
-      .filter(item => item.type === 'file' && IMAGE_EXTENSIONS.test(item.name) && (/^ritratt-/i.test(item.name) || /^gallery-/i.test(item.name) || item.name === 'san-guzepp-purcissjoni.png'))
-      .sort((a, b) => b.name.localeCompare(a.name, 'mt', { numeric: true }))
-      .map(item => ({
-        file: item.download_url,
-        caption: niceCaption(item.name)
-      }));
+    photos = text.split(/\r?\n/)
+      .map(line => line.trim())
+      .filter(line => line && !line.startsWith('#'))
+      .map(file => ({ file, caption: niceCaption(file) }))
+      .filter(photo => /\.(jpe?g|png|webp|gif)$/i.test(photo.file));
 
     if (!photos.length) {
-      grid.innerHTML = '<p>Għad m’hemmx ritratti fil-gallerija.</p>';
+      grid.innerHTML = '<p>Għad m’hemmx ritratti f’din il-gallerija.</p>';
       return;
     }
 
     grid.innerHTML = photos.map((photo, index) => `
       <button class="photo-card" type="button" data-index="${index}" aria-label="${photo.caption}">
-        <img src="${photo.file}" alt="${photo.caption}" loading="lazy">
+        <img src="${encodeURI(photo.file)}" alt="${photo.caption}" loading="lazy">
       </button>`).join('');
 
     grid.addEventListener('click', event => {
@@ -54,22 +47,20 @@ function openPhoto(index) {
   currentPhoto = index;
   const box = document.getElementById('lightbox');
   const image = document.getElementById('lightbox-img');
-  image.src = photos[currentPhoto].file;
+  image.src = encodeURI(photos[currentPhoto].file);
   image.alt = photos[currentPhoto].caption;
   box.classList.add('show');
   box.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
 }
-
 function changePhoto(step, event) {
   if (event) event.stopPropagation();
   if (!photos.length) return;
   currentPhoto = (currentPhoto + step + photos.length) % photos.length;
   const image = document.getElementById('lightbox-img');
-  image.src = photos[currentPhoto].file;
+  image.src = encodeURI(photos[currentPhoto].file);
   image.alt = photos[currentPhoto].caption;
 }
-
 function closePhoto(event) {
   if (event && (event.target.id === 'lightbox-img' || event.target.classList.contains('lightbox-prev') || event.target.classList.contains('lightbox-next'))) return;
   const box = document.getElementById('lightbox');
@@ -77,13 +68,11 @@ function closePhoto(event) {
   box.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
 }
-
 document.addEventListener('keydown', event => {
   const box = document.getElementById('lightbox');
-  if (!box.classList.contains('show')) return;
+  if (!box || !box.classList.contains('show')) return;
   if (event.key === 'Escape') closePhoto();
   if (event.key === 'ArrowLeft') changePhoto(-1);
   if (event.key === 'ArrowRight') changePhoto(1);
 });
-
 document.addEventListener('DOMContentLoaded', loadGallery);

@@ -1,24 +1,37 @@
 # GALLERIJA TAR-RITRATTI
-# Biex iżżid ritratt ġdid:
-# 1. Tella' r-ritratt fil-folder prinċipali tal-website fuq GitHub.
-# 2. Żid linja hawn taħt: isem-tal-file | deskrizzjoni
-# L-ewwel ritratt fil-lista jidher l-ewwel fil-gallerija.
+# L-ewwel isem fil-lista jidher l-ewwel fuq il-paġna.
+# Meta ttella' ritratt ġdid, żid ismu FUQ NETT f'din il-lista.
 
-san-guzepp-purcissjoni.png | San Ġużepp fil-festa parrokkjali
-ritratt-01.jpg | Ritratt mill-ħajja tal-Parroċċa
-ritratt-02.jpg | Ritratt mill-ħajja tal-Parroċċa
-ritratt-03.jpg | Ritratt mill-ħajja tal-Parroċċa
-ritratt-04.jpg | Ritratt mill-ħajja tal-Parroċċa
-ritratt-05.jpg | Ritratt mill-ħajja tal-Parroċċa
-ritratt-06.jpg | Ritratt mill-ħajja tal-Parroċċa
-ritratt-07.jpg | Ritratt mill-ħajja tal-Parroċċa
-ritratt-08.jpg | Ritratt mill-ħajja tal-Parroċċa
-ritratt-09.jpg | Ritratt mill-ħajja tal-Parroċċa
-ritratt-10.jpg | Ritratt mill-ħajja tal-Parroċċa
-ritratt-11.jpg | Ritratt mill-ħajja tal-Parroċċa
-ritratt-12.jpg | Ritratt mill-ħajja tal-Parroċċa
-ritratt-13.jpg | Ritratt mill-ħajja tal-Parroċċa
-ritratt-14.jpg | Ritratt mill-ħajja tal-Parroċċa
-ritratt-15.jpeg | Ritratt mill-ħajja tal-Parroċċa
-ritratt-16.jpeg | Ritratt mill-ħajja tal-Parroċċa
-ritratt-17.jpeg | Ritratt mill-ħajja tal-Parroċċa
+san-guzepp-purcissjoni.png
+ritratt-17.jpeg
+gallery-purcisjoni9-2026.png
+gallery-purcisjoni8-2026.png
+gallery-purcisjoni7-2026.png
+gallery-purcisjoni6-2026.png
+gallery-purcisjoni5-2026.png
+gallery-purcisjoni4-2026.png
+gallery-purcisjoni3-2026.png
+gallery-purcisjoni2-2026.png
+gallery-purcisjoni11-2026.png
+gallery-purcisjoni10-2026.png
+gallery-purcisjoni1-2026.png
+gallery-purcisjoni-2026.png
+gallery-muturi5.jpg
+gallery-muturi4.jpg
+gallery-muturi3.jpg
+gallery-muturi2.jpg
+gallery-muturi1.jpg
+gallery-mutur7.jpg
+gallery-motor6.jpg
+gallery-frangisk9-2026.png
+gallery-frangisk8-2026.png
+gallery-frangisk7-2026.png
+gallery-frangisk6-2026.png
+gallery-frangisk5-2026.png
+gallery-frangisk2-2026.png
+gallery-frangisk1-2026.png
+gallery-fangisk4-2026.png
+gallery-fangisk3-2026.png
+gallery-claude2-2026.jpg
+gallery-claude1-2026.jpg
+gallery-claude-2026.jpg
