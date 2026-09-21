@@ -1,7 +1,7 @@
 # GALLERIJA TAR-RITRATTI
 # L-ewwel isem fil-lista jidher l-ewwel fuq il-paġna.
 # Meta ttella' ritratt ġdid, żid ismu FUQ NETT f'din il-lista.
-
+gallery-purcisjoni12-2026
 gallery-purcisjoni-2026.png
 gallery-purcisjoni1-2026.png
 gallery-purcisjoni2-2026.png
@@ -35,4 +35,4 @@ gallery-mutur7.jpg
 gallery-motor6.jpg
 ritratt-17.jpeg
 san-guzepp-purcissjoni.png
-gallery-purcisjoni12-2026
+
