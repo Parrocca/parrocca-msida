@@ -2,6 +2,7 @@
 # L-ewwel isem fil-lista jidher l-ewwel fuq il-paġna.
 # Meta ttella' ritratt ġdid, żid ismu FUQ NETT f'din il-lista.
 
+iltaqghu-galeacarmelo.png
 iltaqghu-borgcv.png
 iltaqghu-camillerimj.png
 iltaqghu-hborg.png
