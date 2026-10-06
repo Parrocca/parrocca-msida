@@ -1,6 +1,14 @@
 # GALLERIJA TAR-RITRATTI
 # L-ewwel isem fil-lista jidher l-ewwel fuq il-paġna.
 # Meta ttella' ritratt ġdid, żid ismu FUQ NETT f'din il-lista.
+gallery-ruzarju1.png
+gallery-ruzarju2.png
+gallery-ruzarju3.png
+gallery-ruzarju4.png
+gallery-ruzarju5.png
+gallery-ruzarju6.png
+gallery-ruzarju7.png
+gallery-ruzarju8.png
 gallery-purcisjoni13-2026.png
 gallery-pucisjoni15-2026.png
 gallery-purcisjoni14-2026.png
