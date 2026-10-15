@@ -1,6 +1,12 @@
 # GALLERIJA TAR-RITRATTI
 # L-ewwel isem fil-lista jidher l-ewwel fuq il-paġna.
 # Meta ttella' ritratt ġdid, żid ismu FUQ NETT f'din il-lista.
+
+gallery-60plus1.png
+gallery-60plus2.png
+gallery-60plus3.png
+gallery-60plus4.png
+gallery-60plus5.png
 gallery-600.jpg
 gallery-60+.jpg
 gallery-60.jpg
